@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
+import 'package:http/http.dart' as http;
+
 import 'package:epicture/tabs/favorite.dart';
 import 'package:epicture/tabs/home.dart';
 import 'package:epicture/tabs/profile.dart';
 import 'package:epicture/tabs/search.dart';
 
+
 void main() {
   runApp(MaterialApp(
-      title: "Using Tabs",
+      title: "Epicture",
       home: MyHome()));
 }
 
@@ -35,7 +38,7 @@ class MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Using Bottom Navigation Bar"),
+        title: Text("Epicture"),
         backgroundColor: Colors.blueGrey,
       ),
       body: TabBarView(
