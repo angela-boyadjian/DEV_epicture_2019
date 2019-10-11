@@ -3,45 +3,73 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:epicture/const.dart';
+import 'package:flutter/foundation.dart';
+class Imgur {
+  final String success;
+  final int status;
+  final List<ImgurImage> imgurImages;
 
-class ImgurImages {
-  List<ImgurImage> images;
+  Imgur({
+    this.success,
+    this.status,
+    this.imgurImages,
+  });
 
-  ImgurImages({this.images});
+  List<ImgurImage> get images {
+    return imgurImages;
+  }
 
-  factory ImgurImages.fromJson(Map<String, dynamic> json) => new ImgurImages(
-      images: new List<ImgurImage>.from(
-          json["data"].map((x) => ImgurImage.fromJson(x))));
+  factory Imgur.fromJson(Map<String, dynamic> json) {
+    return new Imgur(
+      success: json['id'],
+      status: json['status'],
+      imgurImages: json['data'].map((value) => new ImgurImage.fromJson(value)).toList()
+    );
+  }
 }
 
 class ImgurImage {
-  static int TYPE_PROGRESS = 1;
-  static int TYPE_ITEM = 2;
-  static int TYPE_ERROR = 3;
+  final String title;
   final String link;
-  final int itemType;
+  final bool isAlbum;
 
-  ImgurImage({this.link, this.itemType});
+
+  ImgurImage({
+    this.title,
+    this.link,
+    this.isAlbum,
+  });
 
   factory ImgurImage.fromJson(Map<String, dynamic> json) {
-    if (json['type'] != null && json['type'] == "image/jpeg") {
-      return ImgurImage(
+    return new ImgurImage(
+        title: json['title'],
         link: json['link'],
-        itemType: ImgurImage.TYPE_ITEM,
-      );
-    }
-    return null;
+        isAlbum: json['is_album'],
+    );
+  }
+
+  String get linkUrl {
+    return link;
   }
 }
 
-Future<ImgurImages> fetchImages() async {
-  final response = await http.get(
-    'https://api.imgur.com/3/gallery/hot/viral/0.json',
-    headers: {HttpHeaders.authorizationHeader: "Client-ID " + API_KEY},
+Future<List<ImgurImage>> getData(http.Client client, int page) async {
+  http.Response response = await client.get(
+    Uri.encodeFull("https://api.imgur.com/3/gallery/hot/viral/" + page.toString() + ".json"),
+    headers: {
+      HttpHeaders.authorizationHeader: "Client-ID " + API_KEY,
+      "Accept" : "application/json",
+    }
   );
-  if (response.statusCode == 200) {
-    return ImgurImages.fromJson(json.decode(response.body));
-  } else {
-    throw Exception('Failed to fetch Images');
-  }
+  return compute(parsePhotos, response.body);
+}
+
+List<ImgurImage> parsePhotos(String responseBody) {
+  final parsed = json.decode(responseBody);
+
+  var all = (parsed["data"] as List).map<ImgurImage>((json) => 
+      new ImgurImage.fromJson(json)).toList();
+  List<ImgurImage> img = List<ImgurImage>.from(all);
+  img.removeWhere((item) => item.isAlbum == true);
+  return img;
 }
