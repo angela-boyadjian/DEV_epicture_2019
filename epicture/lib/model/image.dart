@@ -38,6 +38,7 @@ class ImgurImage {
   final String description;
   final int commentCount;
   final int views;
+  final List<dynamic> tags;
 
   ImgurImage({
     this.title,
@@ -49,6 +50,7 @@ class ImgurImage {
     this.description,
     this.commentCount,
     this.views,
+    this.tags,
   });
 
   factory ImgurImage.fromJson(Map<String, dynamic> json) {
@@ -62,6 +64,7 @@ class ImgurImage {
         description: json['description'],
         commentCount: json['comment_count'],
         views: json['views'],
+        tags: json['tags'],
     );
   }
 

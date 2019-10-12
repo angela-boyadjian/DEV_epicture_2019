@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:epicture/model/image.dart';
 import 'imageBar.dart';
+import 'imageTags.dart';
 
 class ImageCard extends StatefulWidget {
   final ImgurImage photo;
@@ -38,6 +39,7 @@ class ImageCardState extends State<ImageCard> {
               Icon(Icons.remove_red_eye, color: Colors.white),
             ],),
             new CachedNetworkImage(imageUrl: photo.link),
+            new ImageTags(photo),
             new ImageBar(photo),
           ],
         ),
