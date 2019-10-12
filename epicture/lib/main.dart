@@ -35,14 +35,14 @@ class MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         title: Text("Epicture"),
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Colors.black45,
       ),
       body: TabBarView(
         children: <Widget>[HomeTab(), SearchTab(), FavoriteTab(), ProfileTab()],
         controller: controller,
       ),
       bottomNavigationBar: Material(
-        color: Colors.blueGrey,
+        color: Colors.black45,
         child: TabBar(
           tabs: <Tab>[
             Tab(

@@ -16,22 +16,23 @@ class ImageCardState extends State<ImageCard> {
   ImgurImage photo;
   String renderUrl;
   ImageCardState(this.photo);
-  Color favColor = Colors.grey;
+  Color favColor = Colors.white;
   bool isFav = false;
-  Color upColor = Colors.grey;
+  Color upColor = Colors.white;
   bool isUp = false;
 
   Widget get imageCard {
     return new Card(
+      color: Colors.black54,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Center(child: Text(photo.title, style: TextStyle(height: 1, fontSize: 20, fontWeight: FontWeight.bold))),
+            Center(child: Text(photo.title, style: TextStyle(color: Colors.white, height: 1, fontSize: 20, fontWeight: FontWeight.bold))),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-              Text(photo.views.toString(), style: TextStyle(color: Colors.grey)),
-              Icon(Icons.remove_red_eye, color: Colors.grey),
+              Text(photo.views.toString(), style: TextStyle(color: Colors.white)),
+              Icon(Icons.remove_red_eye, color: Colors.white),
             ],),
             new CachedNetworkImage(imageUrl: photo.link),
             new ButtonTheme.bar(
@@ -40,10 +41,10 @@ class ImageCardState extends State<ImageCard> {
                 children: <Widget>[
                   new FlatButton.icon(
                       icon: Icon(Icons.arrow_upward, color: upColor),
-                      label: Text(photo.ups.toString(), style: TextStyle(color: Colors.grey)),
+                      label: Text(photo.ups.toString(), style: TextStyle(color: Colors.white)),
                       onPressed: () { setState(() {
                         if (isUp) {
-                          upColor = Colors.grey;
+                          upColor = Colors.white;
                           isUp = false;
                         } else {
                           upColor = Colors.green;
@@ -52,16 +53,16 @@ class ImageCardState extends State<ImageCard> {
                       });},
                   ),
                   new FlatButton.icon(
-                      icon: Icon(Icons.comment, color: Colors.grey),
-                      label: Text(photo.commentCount.toString(), style: TextStyle(color: Colors.grey)),
+                      icon: Icon(Icons.comment, color: Colors.white),
+                      label: Text(photo.commentCount.toString(), style: TextStyle(color: Colors.white)),
                       onPressed: () {}
                   ),
                   new FlatButton.icon(
                       icon: Icon(Icons.favorite, color: favColor),
-                      label: Text("42", style: TextStyle(color: Colors.grey)),
+                      label: Text("42", style: TextStyle(color: Colors.white)),
                       onPressed: () { setState(() {
                         if (isFav) {
-                          favColor = Colors.grey;
+                          favColor = Colors.white;
                           isFav = false;
                         } else {
                           favColor = Colors.pink;
@@ -70,7 +71,7 @@ class ImageCardState extends State<ImageCard> {
                       });},
                   ),
                   new IconButton(
-                      icon: Icon(Icons.share, color: Colors.grey),
+                      icon: Icon(Icons.share, color: Colors.white),
                       onPressed: () { },
                   ),
                 ],

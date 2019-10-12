@@ -15,6 +15,7 @@ class HomeTab extends StatefulWidget {
 class HomeTabState extends State<HomeTab> {
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.black54,
         body: new FutureBuilder<List<ImgurImage>>(
           future: gettingData(),
           builder: (context, snapshot) {
