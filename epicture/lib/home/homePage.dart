@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:epicture/model/image.dart';
-import 'package:epicture/ui/imageCard.dart';
+import 'package:epicture/model/requests.dart';
+import 'package:epicture/images/imageCard.dart';
 
 class HomePage extends StatefulWidget {
   List<ImgurImage> photos;
