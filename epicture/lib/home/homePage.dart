@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:epicture/model/image.dart';
 import 'package:epicture/model/requests.dart';
 import 'package:epicture/images/imageCard.dart';
+import 'homeBar.dart';
 
 class HomePage extends StatefulWidget {
   List<ImgurImage> photos;
@@ -12,11 +13,12 @@ class HomePage extends StatefulWidget {
   HomePageState createState() => new HomePageState();
 }
 
+// add_a_photo 
 class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(preferredSize: Size.fromHeight(20.0),
-          child: AppBar(backgroundColor: Colors.black54),
+      appBar: PreferredSize(preferredSize: Size.fromHeight(45.0),
+          child: new HomeBar(),
       ),
         backgroundColor: Colors.black54,
         body: new FutureBuilder<List<ImgurImage>>(

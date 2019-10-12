@@ -76,7 +76,7 @@ class SearchImgState extends State<SearchImg> {
   }
 
   Widget buildAppBar(BuildContext context) {
-    return new AppBar(backgroundColor: Colors.grey, centerTitle: true,
+    return new AppBar(backgroundColor: Colors.black54, centerTitle: true,
     title: appBarTitle,
     actions: <Widget>[
       new IconButton(
