@@ -62,13 +62,6 @@ class PhotosListState extends State<PhotosList> {
       itemCount: widget.photos.length,
       itemBuilder: (context, index) {
         return ImageCard(widget.photos[index]);
-        // return Stack(
-        //   children: <Widget> [
-        //       new CachedNetworkImage(imageUrl: widget.photos[index].link),
-        //       // new Image.network(widget.photos[index].link),
-        //       Center(child: Text(widget.photos[index].title)),
-        //   ]
-      // );
       },
     );
   }
