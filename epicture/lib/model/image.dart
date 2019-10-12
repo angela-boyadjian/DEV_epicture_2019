@@ -32,12 +32,19 @@ class ImgurImage {
   final String title;
   final String link;
   final bool isAlbum;
-
+  final int ups;
+  final int downs;
+  final String section;
+  final String description;
 
   ImgurImage({
     this.title,
     this.link,
     this.isAlbum,
+    this.ups,
+    this.downs,
+    this.section,
+    this.description,
   });
 
   factory ImgurImage.fromJson(Map<String, dynamic> json) {
@@ -45,6 +52,10 @@ class ImgurImage {
         title: json['title'],
         link: json['link'],
         isAlbum: json['is_album'],
+        ups: json['ups'],
+        downs: json['downs'],
+        section: json['section'],
+        description: json['description'],
     );
   }
 

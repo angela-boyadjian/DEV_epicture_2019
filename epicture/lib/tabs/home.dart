@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:epicture/model/image.dart';
 import 'package:http/http.dart' as http;
+import 'package:epicture/tabs/imageCard.dart';
 
 class HomeTab extends StatefulWidget {
   List<ImgurImage> photos;
@@ -45,6 +47,7 @@ class PhotosListState extends State<PhotosList> {
   _scrollListener() {
  
  }
+  
   @override
   void initState() {
     _controller = ScrollController();
@@ -58,7 +61,14 @@ class PhotosListState extends State<PhotosList> {
       controller: _controller,
       itemCount: widget.photos.length,
       itemBuilder: (context, index) {
-        return new Image.network(widget.photos[index].link);
+        return ImageCard(widget.photos[index]);
+        // return Stack(
+        //   children: <Widget> [
+        //       new CachedNetworkImage(imageUrl: widget.photos[index].link),
+        //       // new Image.network(widget.photos[index].link),
+        //       Center(child: Text(widget.photos[index].title)),
+        //   ]
+      // );
       },
     );
   }

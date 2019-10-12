@@ -38,7 +38,7 @@ class MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin {
         backgroundColor: Colors.blueGrey,
       ),
       body: TabBarView(
-        children: <Widget>[FavoriteTab(), SearchTab(), HomeTab(), ProfileTab()],
+        children: <Widget>[HomeTab(), SearchTab(), FavoriteTab(), ProfileTab()],
         controller: controller,
       ),
       bottomNavigationBar: Material(
@@ -46,13 +46,13 @@ class MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin {
         child: TabBar(
           tabs: <Tab>[
             Tab(
-              icon: Icon(Icons.favorite),
+              icon: Icon(Icons.home),
             ),
             Tab(
               icon: Icon(Icons.search),
             ),
             Tab(
-              icon: Icon(Icons.home),
+              icon: Icon(Icons.favorite),
             ),
             Tab(
               icon: Icon(Icons.account_circle),
