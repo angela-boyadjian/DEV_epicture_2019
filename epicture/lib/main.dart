@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:epicture/tabs/favorite.dart';
-import 'package:epicture/tabs/home.dart';
-import 'package:epicture/tabs/profile.dart';
-import 'package:epicture/tabs/search.dart';
+import 'package:epicture/favorite/favorite.dart';
+import 'package:epicture/home/home.dart';
+import 'package:epicture/profile/profile.dart';
+import 'package:epicture/search/search.dart';
 
 void main() {
   runApp(MaterialApp(

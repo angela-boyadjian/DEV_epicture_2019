@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:epicture/model/image.dart';
-import 'package:http/http.dart' as http;
-import 'package:epicture/tabs/imageCard.dart';
+import 'imageCard.dart';
 
 class HomeTab extends StatefulWidget {
   List<ImgurImage> photos;
