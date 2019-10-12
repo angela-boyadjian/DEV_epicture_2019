@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:epicture/favorite/favorite.dart';
-import 'package:epicture/home/home.dart';
-import 'package:epicture/profile/profile.dart';
-import 'package:epicture/search/search.dart';
+import 'package:epicture/favorite/favoritePage.dart';
+import 'package:epicture/home/homePage.dart';
+import 'package:epicture/profile/profilePage.dart';
+import 'package:epicture/search/searchPage.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -33,12 +33,12 @@ class MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Epicture"),
-        backgroundColor: Colors.black45,
-      ),
+      // appBar: AppBar(
+      //   title: Text("Epicture"),
+      //   backgroundColor: Colors.black45,
+      // ),
       body: TabBarView(
-        children: <Widget>[HomeTab(), SearchTab(), FavoriteTab(), ProfileTab()],
+        children: <Widget>[HomePage(), SearchPage(), FavoritePage(), ProfilePage()],
         controller: controller,
       ),
       bottomNavigationBar: Material(

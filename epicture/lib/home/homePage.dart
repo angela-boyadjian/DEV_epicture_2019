@@ -4,16 +4,19 @@ import 'package:http/http.dart' as http;
 import 'package:epicture/model/image.dart';
 import 'imageCard.dart';
 
-class HomeTab extends StatefulWidget {
+class HomePage extends StatefulWidget {
   List<ImgurImage> photos;
   var  mPageCount = 0;
   @override
-  HomeTabState createState() => new HomeTabState();
+  HomePageState createState() => new HomePageState();
 }
 
-class HomeTabState extends State<HomeTab> {
+class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(preferredSize: Size.fromHeight(20.0),
+          child: AppBar(backgroundColor: Colors.black54),
+      ),
         backgroundColor: Colors.black54,
         body: new FutureBuilder<List<ImgurImage>>(
           future: gettingData(),
