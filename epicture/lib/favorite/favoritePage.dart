@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 
-class FavoritePage extends StatelessWidget {
+import 'package:epicture/images/photosList.dart';
+import 'package:epicture/model/image.dart';
+import 'package:epicture/model/requests.dart';
+
+class FavoritePage extends StatefulWidget {
+  List<ImgurImage> photos;
+
   @override
+  FavoritePageState createState() => new FavoritePageState();
+}
+class FavoritePageState extends State<FavoritePage> {
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.red,
@@ -16,8 +26,12 @@ class FavoritePage extends StatelessWidget {
                 color: Colors.white,
               ),
               Text(
-                "Favorite Tab",
-                style: TextStyle(color: Colors.white),
+                "Tap the heart on any posts to save it",
+                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                "in your favorites",
+                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               )
             ],
           ),
