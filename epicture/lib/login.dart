@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:oauth2/oauth2.dart' as oauth2;
 import 'dart:io';
 
 import 'services/gallery_viral_services.dart';
@@ -12,24 +13,34 @@ class LoginPage extends StatefulWidget {
   LoginPageState createState() => LoginPageState();
 }
 
+
 class LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixin {
   final authorizationEndpoint = Uri.parse("https://imgur.com/oauth2/authorization");
   final tokenEndpoint = Uri.parse("https://imgur.com/oauth2/token");
   final redirectUrl = Uri.parse("https://imgur.com/oauth2-redirect");
-  final credentialsFile = new File("./ccredentialsFile");
+  final credentialsFile = new File("./credentialsFile");
 
+  Future<String> getGrant() async {
+    var exists = await credentialsFile.exists();
 
+    if (exists) {
+      var credentials = new oauth2.Credentials.fromJson(
+          await credentialsFile.readAsString());
+      return credentials.toString();
+    }
+    var grant = new oauth2.AuthorizationCodeGrant(
+        apiKey, authorizationEndpoint, tokenEndpoint,
+        secret: secret);
+    return grant.toString();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Login'),
-        backgroundColor: Colors.white,
-      ),
-      body: WebView(
-        initialUrl: 'https://imgur.com/signin?redirect=%2F',
-      )
+    final grant = new oauth2.AuthorizationCodeGrant(
+        apiKey, authorizationEndpoint, tokenEndpoint,
+        secret: secret);
+    return WebView(
+      initialUrl: grant.getAuthorizationUrl(redirectUrl).toString(),
     );
   }
 }

@@ -13,7 +13,7 @@ import 'package:epicture/login.dart';
 void main() {
   runApp(MaterialApp(
       title: "Epicture",
-      home: MyHome()));
+      home: LoginPage()));
 }
 
 class MyHome extends StatefulWidget {

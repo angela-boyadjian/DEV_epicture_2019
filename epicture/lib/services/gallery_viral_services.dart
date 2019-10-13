@@ -28,7 +28,7 @@ const String secret = "6c6de2bdb21487b6b1e5c0a37320ec12e6090db3";
 final authorizationEndpoint = Uri.parse("https://imgur.com/oauth2/authorization");
 final tokenEndpoint = Uri.parse("https://imgur.com/oauth2/token");
 final redirectUrl = Uri.parse("https://imgur.com/oauth2-redirect");
-final credentialsFile = new File("./ccredentialsFile");
+final credentialsFile = new File("./credentialsFile");
 
 Future<oauth2.AuthorizationCodeGrant> getClient() async {
   var exists = await credentialsFile.exists();
