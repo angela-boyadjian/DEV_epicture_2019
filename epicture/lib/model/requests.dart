@@ -12,7 +12,7 @@ Future<List<ImgurImage>> getData(http.Client client, int page) async {
   http.Response response = await client.get(
     Uri.encodeFull("https://api.imgur.com/3/gallery/hot/viral/" + page.toString() + ".json"),
     headers: {
-      HttpHeaders.authorizationHeader: "Client-ID " + API_KEY,
+      HttpHeaders.authorizationHeader: "Client-ID " + Constants.API_KEY,
       "Accept" : "application/json",
     }
   );
@@ -24,7 +24,7 @@ Future<List<ImgurImage>> getSearchData(http.Client client, String searchTerm) as
   http.Response response = await client.get(
     Uri.encodeFull("https://api.imgur.com/3/gallery/search/?q=/" + searchTerm),
     headers: {
-      HttpHeaders.authorizationHeader: "Client-ID " + API_KEY,
+      HttpHeaders.authorizationHeader: "Client-ID " + Constants.API_KEY,
       "Accept" : "application/json",
     }
   );

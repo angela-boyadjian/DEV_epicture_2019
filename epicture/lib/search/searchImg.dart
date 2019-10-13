@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:epicture/model/image.dart';
 import 'package:http/http.dart' as http;
-import 'package:epicture/home/homePage.dart';
 import 'package:epicture/model/requests.dart';
+import 'package:epicture/images/photosList.dart';
 
 class SearchImg extends StatefulWidget {
   List<ImgurImage> photos;

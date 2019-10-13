@@ -60,8 +60,10 @@ class ImageCaptureState extends State<ImageCapture> {
                     icon: Icon(Icons.file_upload, color: Colors.white, size: 60),
                     onPressed: () {
                       pickImage(ImageSource.gallery);
-                      Navigator.push(context, new MaterialPageRoute(
-                        builder: (context) => Upload(imageFile: imageFile)));
+                      if (imageFile != null) {
+                        Navigator.push(context, new MaterialPageRoute(
+                          builder: (context) => Upload(imageFile: imageFile)));
+                      }
                     }
                   ),
                 ),
