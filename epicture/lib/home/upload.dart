@@ -85,6 +85,7 @@ class UploadState extends State<Upload> {
     String filePath = 'images/${DateTime.now()}.png';
 
     setState(() {
+      //TODO UPLOAD
     });
   }
 }

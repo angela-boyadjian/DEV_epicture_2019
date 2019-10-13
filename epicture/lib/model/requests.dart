@@ -30,3 +30,5 @@ Future<List<ImgurImage>> getSearchData(http.Client client, String searchTerm) as
   );
   return compute(parsePhotos, response.body);
 }
+
+// TODO Upload file
