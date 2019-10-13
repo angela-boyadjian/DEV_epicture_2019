@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 
+import 'upload.dart';
+
 class HomeBar extends StatefulWidget {
-  HomeBar();
+  BuildContext context;
+  HomeBar(this.context);
 
   @override
-  State<StatefulWidget> createState() {
-    return HomeBarState();
-  }
+  State<StatefulWidget> createState() => new HomeBarState(context);
 }
 
 class HomeBarState extends State<HomeBar> {
-
-  HomeBarState();
+  BuildContext context;
+  HomeBarState(this.context);
 
   Widget get homeBar {
     return new AppBar(
@@ -26,7 +27,9 @@ class HomeBarState extends State<HomeBar> {
       actions: <Widget>[
         IconButton(
           onPressed: (){
-            // TODO Button logic
+            Navigator.push(context, new MaterialPageRoute(
+              builder: (context) => Upload(),
+            ),);
           },
           icon: Icon(Icons.add_a_photo, color: Colors.white),
         ),

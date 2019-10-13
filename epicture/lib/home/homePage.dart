@@ -18,7 +18,7 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(preferredSize: Size.fromHeight(45.0),
-          child: new HomeBar(),
+          child: new HomeBar(context),
       ),
         backgroundColor: Colors.black54,
         body: new FutureBuilder<List<ImgurImage>>(
