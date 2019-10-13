@@ -1,6 +1,8 @@
+import 'package:epicture/home/imageCapture.dart';
 import 'package:flutter/material.dart';
 
 import 'upload.dart';
+import 'imageCapture.dart';
 
 class HomeBar extends StatefulWidget {
   BuildContext context;
@@ -28,7 +30,8 @@ class HomeBarState extends State<HomeBar> {
         IconButton(
           onPressed: (){
             Navigator.push(context, new MaterialPageRoute(
-              builder: (context) => Upload(),
+              // builder: (context) => Upload(),
+              builder: (context) => ImageCapture(),
             ),);
           },
           icon: Icon(Icons.add_a_photo, color: Colors.white),

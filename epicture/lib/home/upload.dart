@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
+import 'imageCapture.dart';
 
 class Upload extends StatefulWidget {
   @override
@@ -7,8 +10,11 @@ class Upload extends StatefulWidget {
 
             // fit: BoxFit.fitHeight,
 class UploadState extends State<Upload> {
+  ImageCapture capture;
+
   Widget build (BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: ImageCapture(),
        body: SizedBox.expand(
         child: Container(
           color: Colors.black.withOpacity(0.8),
@@ -23,7 +29,7 @@ class UploadState extends State<Upload> {
                   color: Colors.blueGrey,
                   child: IconButton(
                     icon: Icon(Icons.photo_camera, color: Colors.white, size: 60),
-                    onPressed: (){},
+                    onPressed: (){ },
                     ),
                 ),
               ),
