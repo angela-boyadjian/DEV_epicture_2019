@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 
-import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/widgets.dart';
+
+import 'upload.dart';
 
 class ImageCapture extends StatefulWidget {
   @override
@@ -23,61 +24,63 @@ class ImageCaptureState extends State<ImageCapture> {
         backgroundColor: Colors.black38,
         child: Icon(Icons.cancel, color: Colors.white),
         mini: true,
-        onPressed: (){
-          Navigator.pop(context);
-      },),
-        bottomNavigationBar: BottomAppBar(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.photo_camera,
-                size: 30,
-              ),
-              onPressed: () => pickImage(ImageSource.camera),
-              color: Colors.blue,
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.photo_library,
-                size: 30,
-              ),
-              onPressed: () => pickImage(ImageSource.gallery),
-              color: Colors.pink,
-            ),
-          ],
-        ),
+        onPressed: () => Navigator.pop(context),
       ),
-      body: ListView(
-        children: <Widget>[
-          if (imageFile != null) ...[
-            Container(
-                padding: EdgeInsets.all(32), child: Image.file(imageFile)),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                FlatButton(
-                  color: Colors.black,
-                  child: Icon(Icons.crop),
-                  onPressed: cropImage,
+      body: SizedBox.expand(
+        child: Container(
+          color: Colors.black.withOpacity(0.8),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Flexible(
+                flex: 1,
+                child: Container(
+                  margin: EdgeInsets.all(5),
+                  height: 120, width: 150,
+                  color: Colors.blueGrey,
+                  child: IconButton(
+                    icon: Icon(Icons.photo_camera, color: Colors.white, size: 60),
+                    onPressed: () {
+                      pickImage(ImageSource.camera);
+                      if (imageFile != null) {
+                        Navigator.push(context, new MaterialPageRoute(
+                          builder: (context) => Upload(imageFile: imageFile)));
+                      }
+                    }
+                  ),
                 ),
-                FlatButton(
-                  color: Colors.black,
-                  child: Icon(Icons.refresh),
-                  onPressed: clear,
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(32),
-              child: Uploader(
-                file: imageFile,
               ),
-            )
-          ]
-        ],
+              Flexible(
+                flex: 1,
+                child: Container(
+                  margin: EdgeInsets.all(5),
+                  height: 120, width: 150,
+                  color: Colors.indigo,
+                  child: IconButton(
+                    icon: Icon(Icons.file_upload, color: Colors.white, size: 60),
+                    onPressed: () {
+                      pickImage(ImageSource.gallery);
+                      Navigator.push(context, new MaterialPageRoute(
+                        builder: (context) => Upload(imageFile: imageFile)));
+                    }
+                  ),
+                ),
+              ),
+              Flexible(
+                flex: 1,
+                child: Container(
+                  margin: EdgeInsets.all(5),
+                  height: 120, width: 150,
+                  color: Colors.deepPurple,
+                  child: IconButton(
+                    icon: Icon(Icons.http, color: Colors.white, size: 60),
+                     onPressed: () {},
+                    ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -95,49 +98,5 @@ class ImageCaptureState extends State<ImageCapture> {
     setState(() {
       imageFile = selected;
     });
-  }
-
-  Future<void> cropImage() async {
-    File cropped = await ImageCropper.cropImage(
-      sourcePath: imageFile.path,
-      androidUiSettings: AndroidUiSettings(
-        toolbarTitle: 'Crop Image',
-        toolbarColor: Colors.deepPurple,
-        toolbarWidgetColor: Colors.white,),
-      iosUiSettings: IOSUiSettings(
-        minimumAspectRatio: 1.0,
-      )
-    );
-
-    setState(() {
-      imageFile = cropped ?? imageFile;
-    });
-  }
-
-  void clear() {
-    setState(() => imageFile = null);
-  }
-}
-
-class Uploader extends StatefulWidget {
-  final File file;
-
-  Uploader({Key key, this.file}) : super(key: key);
-
-  UploaderState createState() => UploaderState();
-}
-
-class UploaderState extends State<Uploader> {
-
-  startUpload() {
-    String filePath = 'images/${DateTime.now()}.png';
-
-    setState(() {
-    });
-  }
-
-  @override
-   @override
-  Widget build(BuildContext context) {
   }
 }
