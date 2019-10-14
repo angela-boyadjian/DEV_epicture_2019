@@ -3,29 +3,29 @@ import 'dart:convert';
 import 'tags.dart';
 import 'album.dart';
 
-// class Imgur {
-//   final String success;
-//   final int status;
-//   final List<ImgurImage> imgurImages;
+class Imgur {
+  final String success;
+  final int status;
+  final List<ImgurImage> imgurImages;
 
-//   Imgur({
-//     this.success,
-//     this.status,
-//     this.imgurImages,
-//   });
+  Imgur({
+    this.success,
+    this.status,
+    this.imgurImages,
+  });
 
-//   List<ImgurImage> get images {
-//     return imgurImages;
-//   }
+  List<ImgurImage> get images {
+    return imgurImages;
+  }
 
-//   factory Imgur.fromJson(Map<String, dynamic> json) {
-//     return new Imgur(
-//       success: json['id'],
-//       status: json['status'],
-//       imgurImages: json['data'].map((value) => new ImgurImage.fromJson(value)).toList()
-//     );
-//   }
-// }
+  factory Imgur.fromJson(Map<String, dynamic> json) {
+    return new Imgur(
+      success: json['id'],
+      status: json['status'],
+      imgurImages: json['data'].map((value) => new ImgurImage.fromJson(value)).toList()
+    );
+  }
+}
 
 class ImgurImage {
   final String title;

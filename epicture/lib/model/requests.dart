@@ -32,7 +32,10 @@ Future<List<ImgurImage>> getSearchData(http.Client client, String searchTerm) as
   return compute(parsePhotos, response.body);
 }
 
-// TODO Upload file
+// NOTE Upload file
+void postImage(oauth2.Client client, File img) async {
+  await client.post("https://api.imgur.com/3/upload", body: img.path);
+}
 
 // NOTE Get user favorites
 Future<List<ImgurImage>> getFavorite(oauth2.Client client) async {
