@@ -19,13 +19,7 @@ class UploadState extends State<Upload> {
 
   Widget build (BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple.withOpacity(0.7),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.black38,
-        child: Icon(Icons.cancel, color: Colors.white),
-        mini: true,
-        onPressed:() => Navigator.pop(context),
-      ),
+      backgroundColor: Colors.deepPurple.withOpacity(0.6),
       body: ListView(
         children: <Widget>[
           if (imageFile != null) ...[
@@ -42,7 +36,10 @@ class UploadState extends State<Upload> {
                 FlatButton(
                   color: Colors.blueGrey,
                   child: Icon(Icons.refresh, color: Colors.white),
-                  onPressed: clear,
+                  onPressed: () {
+                    clear(); 
+                    Navigator.pop(context);
+                  }
                 ),
               ],
             ),
@@ -51,7 +48,9 @@ class UploadState extends State<Upload> {
               child: FlatButton(
                   color: Colors.blueGrey,
                   child: Icon(Icons.cloud_upload, color: Colors.white),
-                  onPressed: (){ /* TODO UPLOAD FILE */ },
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                 ),
             )
           ]

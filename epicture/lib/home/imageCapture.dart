@@ -40,12 +40,10 @@ class ImageCaptureState extends State<ImageCapture> {
                   color: Colors.blueGrey,
                   child: IconButton(
                     icon: Icon(Icons.photo_camera, color: Colors.white, size: 60),
-                    onPressed: () {
-                      pickImage(ImageSource.camera);
-                      if (imageFile != null) {
-                        Navigator.push(context, new MaterialPageRoute(
-                          builder: (context) => Upload(imageFile: imageFile)));
-                      }
+                    onPressed: () async {
+                      await pickImage(ImageSource.camera);
+                      Navigator.push(context, new MaterialPageRoute(
+                        builder: (context) => Upload(imageFile: imageFile)));
                     }
                   ),
                 ),
@@ -58,12 +56,10 @@ class ImageCaptureState extends State<ImageCapture> {
                   color: Colors.indigo,
                   child: IconButton(
                     icon: Icon(Icons.file_upload, color: Colors.white, size: 60),
-                    onPressed: () {
-                      pickImage(ImageSource.gallery);
-                      if (imageFile != null) {
-                        Navigator.push(context, new MaterialPageRoute(
-                          builder: (context) => Upload(imageFile: imageFile)));
-                      }
+                    onPressed: () async {
+                      await pickImage(ImageSource.gallery);
+                      Navigator.push(context, new MaterialPageRoute(
+                        builder: (context) => Upload(imageFile: imageFile)));
                     }
                   ),
                 ),
