@@ -20,27 +20,13 @@ class LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixi
   final redirectUrl = Uri.parse("https://imgur.com/oauth2-redirect");
   final credentialsFile = new File("./credentialsFile");
 
-  Future<String> getGrant() async {
-    var exists = await credentialsFile.exists();
-
-    if (exists) {
-      var credentials = new oauth2.Credentials.fromJson(
-          await credentialsFile.readAsString());
-      return credentials.toString();
-    }
-    var grant = new oauth2.AuthorizationCodeGrant(
-        apiKey, authorizationEndpoint, tokenEndpoint,
-        secret: secret);
-    return grant.toString();
-  }
-
   @override
   Widget build(BuildContext context) {
     final grant = new oauth2.AuthorizationCodeGrant(
         apiKey, authorizationEndpoint, tokenEndpoint,
         secret: secret);
     return WebView(
-      initialUrl: grant.getAuthorizationUrl(redirectUrl).toString(),
+        initialUrl: grant.getAuthorizationUrl(redirectUrl).toString(),
     );
   }
 }

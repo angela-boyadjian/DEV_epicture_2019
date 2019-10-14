@@ -24,30 +24,3 @@ const String secret = "6c6de2bdb21487b6b1e5c0a37320ec12e6090db3";
 //    throw Exception('Failed to load Get');
 //  }
 //}
-
-final authorizationEndpoint = Uri.parse("https://imgur.com/oauth2/authorization");
-final tokenEndpoint = Uri.parse("https://imgur.com/oauth2/token");
-final redirectUrl = Uri.parse("https://imgur.com/oauth2-redirect");
-final credentialsFile = new File("./credentialsFile");
-
-Future<oauth2.AuthorizationCodeGrant> getClient() async {
-  var exists = await credentialsFile.exists();
-
-  if (exists) {
-    var credentials = new oauth2.Credentials.fromJson(
-        await credentialsFile.readAsString());
-//    return credentials;
-//      new oauth2.Client(credentials,
-//        identifier: apiKey, secret: secret);
-  }
-  var grant = new oauth2.AuthorizationCodeGrant(
-      apiKey, authorizationEndpoint, tokenEndpoint,
-      secret: secret);
-
-//  await redirect(grant.getAuthorizationUrl(redirectUrl));
-//
-//  var request = await listen(redirectUrl);
-//
-//  return await grant.handleAuthorizationResponse(request.uri.queryParameters);
-  return grant;
-}
