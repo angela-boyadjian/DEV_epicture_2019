@@ -4,16 +4,23 @@ import 'package:epicture/favorite/favoritePage.dart';
 import 'package:epicture/home/homePage.dart';
 import 'package:epicture/profile/profilePage.dart';
 import 'package:epicture/search/searchPage.dart';
+import 'package:http/http.dart' as http;
+
+
+import 'package:epicture/login.dart';
 
 void main() {
   runApp(MaterialApp(
       title: "Epicture",
-      home: new MyHome()));
+      home: LoginPage()));
 }
+
 class MyHome extends StatefulWidget {
   @override
   MyHomeState createState() => new MyHomeState();
 }
+
+
 
 class MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin {
   TabController controller;
