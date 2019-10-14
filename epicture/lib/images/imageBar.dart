@@ -26,7 +26,7 @@ class ImageBarState extends State<ImageBar> {
         alignment: MainAxisAlignment.center,
         children: <Widget>[
           new FlatButton.icon(
-              icon: Icon(Icons.arrow_upward, color: upColor),
+              icon: Icon(Icons.thumb_up, color: upColor),
               label: Text(photo.ups.toString(), style: TextStyle(color: Colors.white)),
               onPressed: () { setState(() {
                 if (isUp) {
