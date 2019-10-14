@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'package:flutter/foundation.dart';
+import 'package:oauth2/oauth2.dart' as oauth2;
 
 import 'package:epicture/const.dart';
 import 'image.dart';
@@ -32,3 +33,10 @@ Future<List<ImgurImage>> getSearchData(http.Client client, String searchTerm) as
 }
 
 // TODO Upload file
+
+// NOTE Get user favorites
+Future<List<ImgurImage>> getFavorite(oauth2.Client client) async {
+  var response = await client.get("https://api.imgur.com/3/account/me/favorites/0");
+
+  return compute(parseFavorite, response.body);
+}

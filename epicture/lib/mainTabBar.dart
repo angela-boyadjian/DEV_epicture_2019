@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 
+import 'package:oauth2/oauth2.dart' as oauth2;
+
 import 'package:epicture/favorite/favoritePage.dart';
 import 'package:epicture/home/homePage.dart';
 import 'package:epicture/profile/profilePage.dart';
 import 'package:epicture/search/searchPage.dart';
 
 class MainTabBar extends StatefulWidget {
+  oauth2.Client client;
 
+  MainTabBar(this.client);
   @override
   MainTabBarState createState() => new MainTabBarState();
 }
@@ -30,7 +34,7 @@ class MainTabBarState extends State<MainTabBar> with SingleTickerProviderStateMi
   Widget build(BuildContext context) {
     return Scaffold(
       body: TabBarView(
-        children: <Widget>[HomePage(), SearchPage(), FavoritePage(), ProfilePage()],
+        children: <Widget>[HomePage(), SearchPage(), FavoritePage(widget.client), ProfilePage()],
         controller: controller,
       ),
       bottomNavigationBar: Material(

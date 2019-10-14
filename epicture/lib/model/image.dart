@@ -1,30 +1,31 @@
 import 'dart:convert';
 
 import 'tags.dart';
+import 'album.dart';
 
-class Imgur {
-  final String success;
-  final int status;
-  final List<ImgurImage> imgurImages;
+// class Imgur {
+//   final String success;
+//   final int status;
+//   final List<ImgurImage> imgurImages;
 
-  Imgur({
-    this.success,
-    this.status,
-    this.imgurImages,
-  });
+//   Imgur({
+//     this.success,
+//     this.status,
+//     this.imgurImages,
+//   });
 
-  List<ImgurImage> get images {
-    return imgurImages;
-  }
+//   List<ImgurImage> get images {
+//     return imgurImages;
+//   }
 
-  factory Imgur.fromJson(Map<String, dynamic> json) {
-    return new Imgur(
-      success: json['id'],
-      status: json['status'],
-      imgurImages: json['data'].map((value) => new ImgurImage.fromJson(value)).toList()
-    );
-  }
-}
+//   factory Imgur.fromJson(Map<String, dynamic> json) {
+//     return new Imgur(
+//       success: json['id'],
+//       status: json['status'],
+//       imgurImages: json['data'].map((value) => new ImgurImage.fromJson(value)).toList()
+//     );
+//   }
+// }
 
 class ImgurImage {
   final String title;
@@ -73,10 +74,19 @@ class ImgurImage {
 
 List<ImgurImage> parsePhotos(String responseBody) {
   final parsed = json.decode(responseBody);
-
+  
   var all = (parsed["data"] as List).map<ImgurImage>((json) => 
      new ImgurImage.fromJson(json)).toList();
   List<ImgurImage> img = List<ImgurImage>.from(all);
   img.removeWhere((item) => item.isAlbum == true);
   return img;
+}
+
+// FIXME Images not display error codec
+List<ImgurImage> parseFavorite(String responseBody) {
+  final parsed = json.decode(responseBody);
+
+  var all = (parsed["data"] as List).map<ImgurImage>((json) => 
+     new ImgurImage.fromJson(json)).toList();
+  return all;
 }

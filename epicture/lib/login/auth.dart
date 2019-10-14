@@ -1,4 +1,3 @@
-import 'package:epicture/mainTabBar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:webview_flutter/webview_flutter.dart';
@@ -7,6 +6,7 @@ import 'package:oauth2/oauth2.dart' as oauth2;
 import 'dart:io';
 import 'dart:async';
 
+import 'package:epicture/mainTabBar.dart';
 import 'package:epicture/const.dart';
 
 final authorizationEndpoint = Uri.parse("https://api.imgur.com/oauth2/authorize?client_id=" +
@@ -28,6 +28,10 @@ class AuthState extends State<Auth> {
     Constants.API_KEY, authorizationEndpoint,
     tokenEndpoint, secret: Constants.API_SECRET);
 
+  get clientObj {
+    return client;
+  }
+
   Future<oauth2.Client> getClient(String req) async {
     if (req.contains("code=")) {
       return await grant.handleAuthorizationResponse(Uri.parse(req).queryParameters);
@@ -37,9 +41,10 @@ class AuthState extends State<Auth> {
 
   void pageFinished(String req, BuildContext context) async {
     client = await getClient(req);
+  
     if (client != null) {
       Navigator.push(context, new MaterialPageRoute(
-              builder: (context) => MainTabBar(),
+              builder: (context) => MainTabBar(client),
       ),);
     }
   }

@@ -4,8 +4,8 @@ class Constants{
   static const String Newest = 'Newest';
   static const String Popular = 'Popular';
   static const String Random = 'Random';
-  static const String API_KEY = "bacdc8f1b09a51e";
-  static const String API_SECRET = "a11d03bfd2f36e073726e6e0b96723e633244688";
+  static const String API_KEY = "85baeb45cb07a04";
+  static const String API_SECRET = "396302b3925792076993294d0ea333155d4ca427";
 
   static const List<String> choices = <String>[
     Newest,
