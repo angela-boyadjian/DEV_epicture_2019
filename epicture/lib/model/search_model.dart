@@ -10,7 +10,7 @@ Future<List<ImgurImage>> getSearchData(http.Client client, String searchTerm) as
   http.Response response = await client.get(
     Uri.encodeFull("https://api.imgur.com/3/gallery/search/?q=/" + searchTerm),
     headers: {
-      HttpHeaders.authorizationHeader: "Client-ID " + API_KEY,
+      HttpHeaders.authorizationHeader: "Client-ID " + Constants.API_KEY,
       "Accept" : "application/json",
     }
   );

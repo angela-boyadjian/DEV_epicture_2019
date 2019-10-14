@@ -40,10 +40,6 @@ class MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text("Epicture"),
-      //   backgroundColor: Colors.black45,
-      // ),
       body: TabBarView(
         children: <Widget>[HomePage(), SearchPage(), FavoritePage(), ProfilePage()],
         controller: controller,

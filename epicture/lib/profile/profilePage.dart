@@ -17,7 +17,7 @@ class ProfilePage extends StatelessWidget {
               ),
               Text(
                 "Profile",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               )
             ],
           ),
