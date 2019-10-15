@@ -46,14 +46,14 @@ class ProfilePageState extends State<ProfilePage> with SingleTickerProviderState
                       Icons.settings
                   )
               ),
-              IconButton(
-                onPressed: () {
-                Navigator.push(context, new MaterialPageRoute(
-                  builder: (context) => ImageCapture(widget.client),
-                  ),);
-                },
-                icon: Icon(Icons.add_a_photo, color: Colors.white),
-              ),
+//              IconButton(
+//                onPressed: () {
+//                Navigator.push(context, new MaterialPageRoute(
+//                  builder: (context) => ImageCapture(widget.client),
+//                  ),);
+//                },
+//                icon: Icon(Icons.add_a_photo, color: Colors.white),
+//              ),
             ]
           ),
 //          body: CustomScrollView(

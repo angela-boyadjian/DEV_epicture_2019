@@ -25,7 +25,27 @@ class Posts extends StatelessWidget {
                   child: const Text('no'),
                   color: Colors.grey[100],
                 ),
-              ],
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  child: const Text('no'),
+                  color: Colors.grey[100],
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  child: const Text('no'),
+                  color: Colors.grey[100],
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  child: const Text('no'),
+                  color: Colors.grey[100],
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  child: const Text('no'),
+                  color: Colors.grey[100],
+                ),
+              ]
             ),
           ),
         ],

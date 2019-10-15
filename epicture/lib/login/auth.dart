@@ -12,7 +12,7 @@ import 'package:epicture/const.dart';
 final authorizationEndpoint = Uri.parse("https://api.imgur.com/oauth2/authorize?client_id=" +
   Constants.API_KEY + "&response_type=token&state=Epicture");
 final tokenEndpoint = Uri.parse("https://api.imgur.com/oauth2/token");
-final redirectUrl = Uri.parse("http://localhost/token");
+final redirectUrl = Uri.parse("http://localhost/test");
 
 class Auth extends StatefulWidget {
   @override
@@ -23,10 +23,16 @@ class AuthState extends State<Auth> {
   oauth2.Client client;
 
   final credentialsFile = new File("./credentialsFile");
+  String newUrl =  "";
 
   var grant = new oauth2.AuthorizationCodeGrant(
     Constants.API_KEY, authorizationEndpoint,
     tokenEndpoint, secret: Constants.API_SECRET);
+
+  void initState() {
+    super.initState();
+    newUrl = grant.getAuthorizationUrl(redirectUrl).toString();
+  }
 
   get clientObj {
     return client;
@@ -41,7 +47,9 @@ class AuthState extends State<Auth> {
 
   void pageFinished(String req, BuildContext context) async {
     client = await getClient(req);
-  
+
+    print("PRRRRRIIIIIIIINBNNNNNT REQEUEST");
+    print(req);
     if (client != null) {
       Navigator.push(context, new MaterialPageRoute(
               builder: (context) => MainTabBar(client),
@@ -54,7 +62,7 @@ class AuthState extends State<Auth> {
     return Container (
       child: WebView(
         javascriptMode: JavascriptMode.unrestricted,
-        initialUrl: grant.getAuthorizationUrl(redirectUrl).toString(),
+        initialUrl: newUrl,
         onPageFinished: (url) { pageFinished(url, context); },
         ),
     );
