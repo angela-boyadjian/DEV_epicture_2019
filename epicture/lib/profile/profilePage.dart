@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oauth2/oauth2.dart' as oauth2;
 
 import 'package:epicture/profile/posts.dart';
 import 'package:epicture/profile/comments.dart';
@@ -9,7 +10,9 @@ import 'package:epicture/home/imageCapture.dart';
 
 
 class ProfilePage extends StatefulWidget {
+  oauth2.Client client;
 
+  ProfilePage(this.client);
   @override
   ProfilePageState createState() => new ProfilePageState();
  }
@@ -46,7 +49,7 @@ class ProfilePageState extends State<ProfilePage> with SingleTickerProviderState
               IconButton(
                 onPressed: () {
                 Navigator.push(context, new MaterialPageRoute(
-                  builder: (context) => ImageCapture(),
+                  builder: (context) => ImageCapture(widget.client),
                   ),);
                 },
                 icon: Icon(Icons.add_a_photo, color: Colors.white),

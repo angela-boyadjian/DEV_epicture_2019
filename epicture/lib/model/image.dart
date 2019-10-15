@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'tags.dart';
+import 'album.dart';
 
 class Imgur {
   final String success;
@@ -73,10 +74,19 @@ class ImgurImage {
 
 List<ImgurImage> parsePhotos(String responseBody) {
   final parsed = json.decode(responseBody);
-
+  
   var all = (parsed["data"] as List).map<ImgurImage>((json) => 
      new ImgurImage.fromJson(json)).toList();
   List<ImgurImage> img = List<ImgurImage>.from(all);
   img.removeWhere((item) => item.isAlbum == true);
   return img;
+}
+
+// FIXME Images not display error codec
+List<ImgurImage> parseFavorite(String responseBody) {
+  final parsed = json.decode(responseBody);
+
+  var all = (parsed["data"] as List).map<ImgurImage>((json) => 
+     new ImgurImage.fromJson(json)).toList();
+  return all;
 }

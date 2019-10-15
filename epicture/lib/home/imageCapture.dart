@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
-
+import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/widgets.dart';
 
 import 'upload.dart';
 
 class ImageCapture extends StatefulWidget {
+  oauth2.Client client;
   @override
-  ImageCapture();
+  ImageCapture(this.client);
 
   ImageCaptureState createState() => ImageCaptureState();
 }
@@ -43,7 +44,7 @@ class ImageCaptureState extends State<ImageCapture> {
                     onPressed: () async {
                       await pickImage(ImageSource.camera);
                       Navigator.push(context, new MaterialPageRoute(
-                        builder: (context) => Upload(imageFile: imageFile)));
+                        builder: (context) => Upload(client: widget.client, imageFile: imageFile)));
                     }
                   ),
                 ),

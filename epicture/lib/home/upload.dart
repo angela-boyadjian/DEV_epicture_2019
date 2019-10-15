@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
+import 'package:oauth2/oauth2.dart' as oauth2;
 
 import 'package:image_cropper/image_cropper.dart';
 import 'package:flutter/widgets.dart';
+import 'package:epicture/model/requests.dart';
 
 class Upload extends StatefulWidget {
   File imageFile;
+  oauth2.Client client;
 
-  Upload({Key key, this.imageFile}) : super(key: key);
+  Upload({Key key, this.client, this.imageFile}) : super(key: key);
   @override
   UploadState createState() => new UploadState(this.imageFile);
 }
@@ -49,6 +52,8 @@ class UploadState extends State<Upload> {
                   color: Colors.blueGrey,
                   child: Icon(Icons.cloud_upload, color: Colors.white),
                   onPressed: () {
+                    // TODO Upload
+                    startUpload();
                     Navigator.pop(context);
                   },
                 ),
@@ -83,6 +88,7 @@ class UploadState extends State<Upload> {
   startUpload() {
     String filePath = 'images/${DateTime.now()}.png';
 
+    postImage(widget.client, imageFile);
     setState(() {
       //TODO UPLOAD
     });
