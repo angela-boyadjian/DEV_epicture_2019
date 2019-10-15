@@ -53,6 +53,25 @@ class ProfilePageState extends State<ProfilePage> with SingleTickerProviderState
               ),
             ]
           ),
+//          body: CustomScrollView(
+//            slivers: <Widget>[
+//              const SliverAppBar(
+//                pinned: true,
+//                expandedHeight: 250.0,
+//                flexibleSpace: FlexibleSpaceBar(
+//                  title: Text('Demo'),
+//                ),
+//              ),
+//              TabBarView(
+//                children: <Widget>[
+//                  Posts(),
+//                  Comments(),
+//                  Following(),
+//                  About()
+//                ],
+//              )
+//            ],
+//          )
           body: TabBarView(
             children: [
               Posts(),
