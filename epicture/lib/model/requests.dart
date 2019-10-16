@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'package:flutter/foundation.dart';
@@ -7,6 +8,7 @@ import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:epicture/const.dart';
 import 'image.dart';
 import 'tags.dart';
+import 'upload.dart';
 
 // NOTE Get data from gallery hot viral
 Future<List<ImgurImage>> getData(http.Client client, int page) async {
@@ -33,8 +35,17 @@ Future<List<ImgurImage>> getSearchData(http.Client client, String searchTerm) as
 }
 
 // NOTE Upload file
-void postImage(oauth2.Client client, File img) async {
-  await client.post("https://api.imgur.com/3/upload", body: img.path);
+void postImage(oauth2.Client client, ImageToPost imgObj) async {
+  List<int> imageBytes = await imgObj.image.readAsBytesSync();
+  String base64Image = base64Encode(imageBytes);
+  var response = await client.post('https://api.imgur.com/3/image?client_id=' + Constants.API_KEY,
+  body: {"image": base64Image, "title": imgObj.title, "description": imgObj.description});
+
+  if (json.decode(response.body)["success"]) {
+    print("UPLOAD SUCCESS");
+  } else {
+    print("FAILED TO UPLOAD");
+  }
 }
 
 // NOTE Get user favorites

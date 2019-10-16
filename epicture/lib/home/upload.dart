@@ -5,6 +5,7 @@ import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:image_cropper/image_cropper.dart';
 import 'package:flutter/widgets.dart';
 import 'package:epicture/model/requests.dart';
+import 'uploadInfo.dart';
 
 class Upload extends StatefulWidget {
   File imageFile;
@@ -50,11 +51,10 @@ class UploadState extends State<Upload> {
               padding: const EdgeInsets.all(32),
               child: FlatButton(
                   color: Colors.blueGrey,
-                  child: Icon(Icons.cloud_upload, color: Colors.white),
+                  child: Icon(Icons.edit, color: Colors.white),
                   onPressed: () {
-                    // TODO Upload
-                    startUpload();
-                    Navigator.pop(context);
+                    Navigator.push(context, new MaterialPageRoute(
+                        builder: (context) => UploadInfo(client: widget.client, imageFile: imageFile)));
                   },
                 ),
             )
@@ -83,14 +83,5 @@ class UploadState extends State<Upload> {
 
   void clear() {
     setState(() => imageFile = null);
-  }
-
-  startUpload() {
-    String filePath = 'images/${DateTime.now()}.png';
-
-    postImage(widget.client, imageFile);
-    setState(() {
-      //TODO UPLOAD
-    });
   }
 }
