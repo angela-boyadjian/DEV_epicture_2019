@@ -36,6 +36,8 @@ class ImgurImage {
   final String section;
   final String description;
   final int commentCount;
+  final int favoriteCount;
+  final bool favorite;
   final int views;
   List<dynamic> tags;
 
@@ -48,23 +50,31 @@ class ImgurImage {
     this.section,
     this.description,
     this.commentCount,
+    this.favoriteCount,
+    this.favorite,
     this.views,
     this.tags,
+
   });
 
   factory ImgurImage.fromJson(Map<String, dynamic> json) {
-    return new ImgurImage(
-        title: json['title'],
-        link: json['link'],
-        isAlbum: json['is_album'],
-        ups: json['ups'],
-        downs: json['downs'],
-        section: json['section'],
-        description: json['description'],
-        commentCount: json['comment_count'],
-        views: json['views'],
-        tags: json['tags'],
-    );
+    if (json['type'] != 'video/mp4') {
+      return ImgurImage(
+          title: json['title'],
+          link: json['link'],
+          isAlbum: json['is_album'],
+          ups: json['ups'],
+          downs: json['downs'],
+          section: json['section'],
+          description: json['description'],
+          commentCount: json['comment_count'],
+          favoriteCount: json['favorite_count'],
+          favorite: json['favorite' ?? false],
+          views: json['views'],
+          tags: json['tags'],
+      );
+    }
+    return null;
   }
 
   String get linkUrl {
@@ -77,9 +87,10 @@ List<ImgurImage> parsePhotos(String responseBody) {
   
   var all = (parsed["data"] as List).map<ImgurImage>((json) => 
      new ImgurImage.fromJson(json)).toList();
+  // print(responseBody);
   List<ImgurImage> img = List<ImgurImage>.from(all);
   img.removeWhere((item) => item.isAlbum == true);
-  return img;
+  return all;
 }
 
 // FIXME Images not display error codec

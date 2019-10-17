@@ -45,7 +45,7 @@ class ImageBarState extends State<ImageBar> {
           ),
           new FlatButton.icon(
               icon: Icon(Icons.favorite, color: favColor),
-              label: Text("42", style: TextStyle(color: Colors.white)),
+              label: Text(photo.favoriteCount.toString(), style: TextStyle(color: Colors.white)),
               onPressed: () { setState(() {
                 if (isFav) {
                   favColor = Colors.white;
