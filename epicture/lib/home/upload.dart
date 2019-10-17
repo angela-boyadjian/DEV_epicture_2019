@@ -4,7 +4,6 @@ import 'package:oauth2/oauth2.dart' as oauth2;
 
 import 'package:image_cropper/image_cropper.dart';
 import 'package:flutter/widgets.dart';
-import 'package:epicture/model/requests.dart';
 import 'uploadInfo.dart';
 
 class Upload extends StatefulWidget {
