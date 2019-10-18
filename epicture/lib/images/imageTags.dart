@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 
 import 'package:epicture/model/image.dart';
-import 'tagsRow.dart';
 
 class ImageTags extends StatefulWidget {
   final ImgurImage photo;
