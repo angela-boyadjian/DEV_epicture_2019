@@ -56,10 +56,6 @@ class ImageBarState extends State<ImageBar> {
                 }
               });},
           ),
-          new IconButton(
-              icon: Icon(Icons.share, color: Colors.white),
-              onPressed: () { },
-          ),
         ],
       ),
     );

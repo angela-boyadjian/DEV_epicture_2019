@@ -9,6 +9,7 @@ import 'package:epicture/const.dart';
 import 'image.dart';
 import 'tags.dart';
 import 'upload.dart';
+import 'album.dart';
 
 // NOTE Get data from gallery hot viral
 Future<List<ImgurImage>> getData(http.Client client, int page) async {
@@ -41,5 +42,5 @@ void postImage(oauth2.Client client, ImageToPost imgObj) async {
 Future<List<ImgurImage>> getFavorite(oauth2.Client client) async {
   var response = await client.get("https://api.imgur.com/3/account/me/favorites/0");
 
-  return compute(parseFavorite, response.body);
+  return compute(parseAlbum, response.body);
 }

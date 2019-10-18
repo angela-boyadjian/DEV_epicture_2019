@@ -40,7 +40,7 @@ class UploadState extends State<Upload> {
                   color: Colors.blueGrey,
                   child: Icon(Icons.refresh, color: Colors.white),
                   onPressed: () {
-                    clear(); 
+                    clear();
                     Navigator.pop(context);
                   }
                 ),
