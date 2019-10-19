@@ -46,7 +46,6 @@ class AboutState extends State<About> with SingleTickerProviderStateMixin {
           Container(
             color: Colors.black54,
           ),
-          // Expanded(...)
         ],
       ),
     ));
@@ -84,7 +83,6 @@ class AboutState extends State<About> with SingleTickerProviderStateMixin {
                     )
                   ],
                 )),
-//              color: Colors.black54,
                 height: 100,
                 decoration: BoxDecoration(
                     color: Colors.black54,

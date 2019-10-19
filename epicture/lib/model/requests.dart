@@ -55,9 +55,9 @@ Future<Account> getAccountBase(oauth2.Client client) async {
 }
 
 Future<List<ImgurImage>> getPosts(oauth2.Client client) async {
-  var response = await client.get("https://api.imgur.com/3/account/me/favorites/0");
+  var response = await client.get("https://api.imgur.com/3/account/me/submissions/");
 
-  return compute(parsePosts, response.body);
+  return compute(parseAlbum, response.body);
 }
 
 void getSubmissions(oauth2.Client client) async {
