@@ -5,7 +5,7 @@ import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:flutter/widgets.dart';
 import 'package:epicture/model/requests.dart';
 import 'package:epicture/model/upload.dart';
-import 'homePage.dart';
+import 'package:epicture/mainTabBar.dart';
 
 class UploadInfo extends StatefulWidget {
   File imageFile;
@@ -86,7 +86,7 @@ class UploadInfoState extends State<UploadInfo> {
                 titleController.text, desController.text);
               postImage(widget.client, imgObj);
               Navigator.push(context, new MaterialPageRoute(
-                builder: (context) => HomePage(widget.client)));
+                builder: (context) => MainTabBar(widget.client)));
             }
           ),
         ],
