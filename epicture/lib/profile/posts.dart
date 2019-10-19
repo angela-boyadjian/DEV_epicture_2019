@@ -1,4 +1,4 @@
-import 'package:epicture/images/photosList.dart';
+import 'package:epicture/images/photosGrid.dart';
 import 'package:epicture/model/image.dart';
 import 'package:epicture/model/requests.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,7 @@ class PostsState extends State<Posts> with SingleTickerProviderStateMixin {
         builder: (context, snapshot) {
           if (snapshot.hasError) print(snapshot.error);
           if (snapshot.hasData) {
-            return PhotosList(photos: snapshot.data);
+            return PhotosGrid(photos: snapshot.data);
           }
           return loadingPage();
         }
@@ -29,7 +29,7 @@ class PostsState extends State<Posts> with SingleTickerProviderStateMixin {
   }
 
   Future<List<ImgurImage>> gettingPosts() {
-    return getFavorite(widget.client);
+    return getPosts(widget.client);
   }
 
   Widget loadingPage() {

@@ -86,7 +86,7 @@ List<ImgurImage> parsePhotos(String responseBody) {
 List<ImgurImage> parseFavorite(String responseBody) {
   final parsed = json.decode(responseBody);
 
-  var all = (parsed["data"] as List).map<ImgurImage>((json) => 
+  var all = (parsed["data"] as List).map<ImgurImage>((json) =>
      new ImgurImage.fromJson(json)).toList();
   return all;
 }
@@ -94,8 +94,6 @@ List<ImgurImage> parseFavorite(String responseBody) {
 List<ImgurImage> parsePosts(String responseBody) {
   final parsed = json.decode(responseBody);
 
-  print("DAAATTAAA");
-  print(parsed.toString());
   var all = (parsed["data"] as List).map<ImgurImage>((json) =>
   new ImgurImage.fromJson(json)).toList();
   return all;
