@@ -8,10 +8,10 @@ import 'package:oauth2/oauth2.dart' as oauth2;
 
 import 'package:epicture/const.dart';
 import 'image.dart';
-import 'tags.dart';
 import 'account.dart';
 import 'upload.dart';
 import 'album.dart';
+import 'comment.dart';
 
 // NOTE Get data from gallery hot viral
 Future<List<ImgurImage>> getData(http.Client client, int page) async {
@@ -58,6 +58,14 @@ Future<List<ImgurImage>> getPosts(oauth2.Client client) async {
   var response = await client.get("https://api.imgur.com/3/account/me/submissions/");
 
   return compute(parseAlbum, response.body);
+}
+
+// NOTE Get comments for given image
+Future<List<Comment>> getComments(oauth2.Client client, String id) async {
+  var response = await client.get("https://api.imgur.com/3/gallery/" +
+    id + "/comments");
+  print(response);
+  return compute(parseComments, response.body);
 }
 
 void getSubmissions(oauth2.Client client) async {

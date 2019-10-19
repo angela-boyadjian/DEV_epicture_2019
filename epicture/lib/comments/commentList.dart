@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
 
-import 'package:epicture/model/image.dart';
-import 'imageCard.dart';
+import 'package:epicture/model/comment.dart';
+// import 'commentCard.dart';
 
-class PhotosList extends StatefulWidget {
-  final List<ImgurImage> photos;
-  oauth2.Client client;
+class CommentList extends StatefulWidget {
+  List<Comment> comments;
 
-  PhotosList({Key key, this.client, this.photos}) : super(key: key);
+  CommentList({Key key, this.comments}) : super(key: key);
   @override
-  PhotosListState createState() => new PhotosListState();
+  CommentListState createState() => new CommentListState();
 }
 
-class PhotosListState extends State<PhotosList> {
+class CommentListState extends State<CommentList> {
 
   ScrollController _controller;
 
-  PhotosListState();
+  CommentListState();
 
   _scrollListener() {
  
@@ -34,9 +33,9 @@ class PhotosListState extends State<PhotosList> {
   Widget build(BuildContext context) {
     return new ListView.builder(
       controller: _controller,
-      itemCount: widget.photos.length,
+      itemCount: widget.comments.length,
       itemBuilder: (context, index) {
-        return ImageCard(widget.client, widget.photos[index], false);
+        return new Text(widget.comments[index].comment);
       },
     );
   }

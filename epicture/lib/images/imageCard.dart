@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:oauth2/oauth2.dart' as oauth2;
 
 import 'package:epicture/model/image.dart';
 import 'imageBar.dart';
@@ -7,8 +8,10 @@ import 'imageTags.dart';
 
 class ImageCard extends StatefulWidget {
   final ImgurImage photo;
-  ImageCard(this.photo);
+  oauth2.Client client;
+  bool isCommentPage;
 
+  ImageCard(this.client, this.photo, this.isCommentPage);
   @override
   State<StatefulWidget> createState() => ImageCardState(photo);
 }
@@ -38,7 +41,7 @@ class ImageCardState extends State<ImageCard> {
             ],),
             new CachedNetworkImage(imageUrl: photo.link),
             new ImageTags(photo),
-            new ImageBar(photo),
+            new ImageBar(widget.client, photo, widget.isCommentPage),
           ],
         ),
       );

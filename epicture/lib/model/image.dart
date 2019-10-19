@@ -25,6 +25,7 @@ class Imgur {
 }
 
 class ImgurImage {
+  final String id;
   final String title;
   final String link;
   final bool isAlbum;
@@ -39,6 +40,7 @@ class ImgurImage {
   List<dynamic> tags;
 
   ImgurImage({
+    this.id,
     this.title,
     this.link,
     this.isAlbum,
@@ -54,11 +56,10 @@ class ImgurImage {
 
   });
 
-  // get album { return isAlbum; }
-
   factory ImgurImage.fromJson(Map<String, dynamic> json) {
     // if (json['type'] != 'video/mp4') {
       return ImgurImage(
+          id: json['id'],
           title: json['title'],
           link: json['link'],
           isAlbum: json['is_album'],

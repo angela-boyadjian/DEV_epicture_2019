@@ -1,0 +1,48 @@
+import 'package:flutter/material.dart';
+import 'package:oauth2/oauth2.dart' as oauth2;
+
+import 'package:epicture/model/image.dart';
+import 'package:epicture/model/comment.dart';
+import 'commentList.dart';
+import 'package:epicture/model/requests.dart';
+
+class CommentPage extends StatefulWidget {
+  ImgurImage photo;
+  oauth2.Client client;
+
+  CommentPage(this.client, this.photo);
+  @override
+  CommentPageState createState() => new CommentPageState();
+}
+
+// add_a_photo 
+class CommentPageState extends State<CommentPage> {
+  List<String> litems = ["1","2","Third","4"];
+  List<Comment> comments = [];
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.blueGrey,
+      appBar: PreferredSize(preferredSize: Size.fromHeight(45.0),
+          child: AppBar(
+            backgroundColor: Colors.black38,
+            title: Text("Comments"),
+            centerTitle: true,
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () => Navigator.pop(context)
+            ),
+          ),
+      ),
+      body: new FutureBuilder<List<Comment>>(
+          future: getComments(widget.client, widget.photo.id),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) print(snapshot.error);
+            return snapshot.hasData
+                ? new CommentList(comments: snapshot.data)
+                : new Center(child: new CircularProgressIndicator());
+          },
+        ),
+    );
+  }
+}
