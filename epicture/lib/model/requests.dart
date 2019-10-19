@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:epicture/model/account.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'package:flutter/foundation.dart';
@@ -7,6 +8,7 @@ import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:epicture/const.dart';
 import 'image.dart';
 import 'tags.dart';
+import 'account.dart';
 
 // NOTE Get data from gallery hot viral
 Future<List<ImgurImage>> getData(http.Client client, int page) async {
@@ -40,6 +42,19 @@ void postImage(oauth2.Client client, File img) async {
 // NOTE Get user favorites
 Future<List<ImgurImage>> getFavorite(oauth2.Client client) async {
   var response = await client.get("https://api.imgur.com/3/account/me/favorites/0");
+
+  return compute(parseFavorite, response.body);
+}
+
+// NOTE Get User Name
+Future<Account> getAccountBase(oauth2.Client client) async {
+  var response = await client.get("https://api.imgur.com/3/account/me");
+
+  return compute(parseAccount, response.body);
+}
+
+Future<List<ImgurImage>> getPosts(oauth2.Client client) async {
+  var response = await client.get("https://api.imgur.com/3/account/favorites/0");
 
   return compute(parseFavorite, response.body);
 }

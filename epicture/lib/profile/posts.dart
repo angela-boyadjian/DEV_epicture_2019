@@ -1,8 +1,44 @@
+import 'package:epicture/images/photosList.dart';
+import 'package:epicture/model/image.dart';
+import 'package:epicture/model/requests.dart';
 import 'package:flutter/material.dart';
+import 'package:oauth2/oauth2.dart' as oauth2;
 
-class Posts extends StatelessWidget {
+
+class Posts extends StatefulWidget {
+  oauth2.Client client;
+
+  Posts(this.client);
+  @override
+  PostsState createState() => new PostsState();
+}
+
+class PostsState extends State<Posts> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
+    return FutureBuilder<List<ImgurImage>>(
+        future: gettingPosts(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) print(snapshot.error);
+          if (snapshot.hasData) {
+            return PhotosList(photos: snapshot.data);
+          }
+          return loadingPage();
+        }
+    );
+  }
+
+  Future<List<ImgurImage>> gettingPosts() {
+    return getFavorite(widget.client);
+  }
+
+  Widget loadingPage() {
+    return Center(
+        child: new CircularProgressIndicator()
+    );
+  }
+
+  Widget posts() {
     return Scaffold(
       backgroundColor: Colors.grey,
       body: CustomScrollView(
@@ -18,31 +54,6 @@ class Posts extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(8),
                   child: const Text('yes'),
-                  color: Colors.grey[100],
-                ),
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  child: const Text('no'),
-                  color: Colors.grey[100],
-                ),
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  child: const Text('no'),
-                  color: Colors.grey[100],
-                ),
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  child: const Text('no'),
-                  color: Colors.grey[100],
-                ),
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  child: const Text('no'),
-                  color: Colors.grey[100],
-                ),
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  child: const Text('no'),
                   color: Colors.grey[100],
                 ),
               ]

@@ -32,5 +32,5 @@ class FavoritePageState extends State<FavoritePage> {
     }
     Future<List<ImgurImage>> gettingFavorite() {
       return getFavorite(widget.client);
-  }
+    }
 }

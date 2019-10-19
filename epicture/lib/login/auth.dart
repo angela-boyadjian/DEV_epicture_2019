@@ -23,15 +23,16 @@ class AuthState extends State<Auth> {
   oauth2.Client client;
 
   final credentialsFile = new File("./credentialsFile");
-  String newUrl =  "";
+  String newUrl;
 
   var grant = new oauth2.AuthorizationCodeGrant(
     Constants.API_KEY, authorizationEndpoint,
     tokenEndpoint, secret: Constants.API_SECRET);
 
   void initState() {
-    super.initState();
     newUrl = grant.getAuthorizationUrl(redirectUrl).toString();
+    print(newUrl);
+    super.initState();
   }
 
   get clientObj {
@@ -48,8 +49,6 @@ class AuthState extends State<Auth> {
   void pageFinished(String req, BuildContext context) async {
     client = await getClient(req);
 
-    print("PRRRRRIIIIIIIINBNNNNNT REQEUEST");
-    print(req);
     if (client != null) {
       Navigator.push(context, new MaterialPageRoute(
               builder: (context) => MainTabBar(client),

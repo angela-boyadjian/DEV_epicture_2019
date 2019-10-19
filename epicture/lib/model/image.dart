@@ -90,3 +90,13 @@ List<ImgurImage> parseFavorite(String responseBody) {
      new ImgurImage.fromJson(json)).toList();
   return all;
 }
+
+List<ImgurImage> parsePosts(String responseBody) {
+  final parsed = json.decode(responseBody);
+
+  print("DAAATTAAA");
+  print(parsed.toString());
+  var all = (parsed["data"] as List).map<ImgurImage>((json) =>
+  new ImgurImage.fromJson(json)).toList();
+  return all;
+}
