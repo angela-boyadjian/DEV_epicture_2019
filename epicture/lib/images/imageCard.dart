@@ -10,9 +10,7 @@ class ImageCard extends StatefulWidget {
   ImageCard(this.photo);
 
   @override
-  State<StatefulWidget> createState() {
-    return ImageCardState(photo);
-  }
+  State<StatefulWidget> createState() => ImageCardState(photo);
 }
 
 class ImageCardState extends State<ImageCard> {

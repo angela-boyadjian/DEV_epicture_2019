@@ -34,7 +34,7 @@ class MainTabBarState extends State<MainTabBar> with SingleTickerProviderStateMi
   Widget build(BuildContext context) {
     return Scaffold(
       body: TabBarView(
-        children: <Widget>[HomePage(widget.client), SearchPage(),
+        children: <Widget>[HomePage(widget.client), SearchPage(widget.client),
           FavoritePage(widget.client), ProfilePage(widget.client)],
         controller: controller,
       ),

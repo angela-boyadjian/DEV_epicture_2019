@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:oauth2/oauth2.dart' as oauth2;
 
 import 'package:epicture/model/image.dart';
-import 'package:http/http.dart' as http;
 import 'package:epicture/model/requests.dart';
 import 'package:epicture/images/photosList.dart';
 
 class SearchImg extends StatefulWidget {
-  List<ImgurImage> photos;
-  var  mPageCount = 0;
+  var mPageCount = 0;
+  oauth2.Client client;
 
+  SearchImg(this.client);
   @override
   SearchImgState createState() => new SearchImgState();
 }
 
 class SearchImgState extends State<SearchImg> {
+  List<ImgurImage> photos;
   Widget appBarTitle = new Text(
     "Search Imgur",
     style: new TextStyle(color: Colors.white),
@@ -22,12 +24,11 @@ class SearchImgState extends State<SearchImg> {
     Icons.search,
     color: Colors.white,
   );
-
   List<dynamic> _list;
   final globalKey = new GlobalKey<ScaffoldState>();
   final TextEditingController _controller = new TextEditingController();
   bool _isSearching;
-  String _searchText = "";
+  String _searchText = "all";
   List searchresult = new List();
 
   SearchImgState() {
@@ -72,7 +73,7 @@ class SearchImgState extends State<SearchImg> {
 
   Future<List<ImgurImage>> gettingSearchData() {
     widget.mPageCount++;
-    return getData(new http.Client(), widget.mPageCount);
+    return getSearchData(widget.client, _searchText, widget.mPageCount);
   }
 
   Widget buildAppBar(BuildContext context) {
@@ -97,7 +98,7 @@ class SearchImgState extends State<SearchImg> {
                     prefixIcon: new Icon(Icons.search, color: Colors.white),
                     hintText: "Search...",
                     hintStyle: new TextStyle(color: Colors.white)),
-                onChanged: searchOperation,
+                onSubmitted: (text) => search,
               );
               _handleSearchStart();
             } else {
@@ -109,6 +110,10 @@ class SearchImgState extends State<SearchImg> {
     ]);
   }
 
+  void search(String text) {
+    _searchText = text;
+    gettingSearchData();
+  }
   void _handleSearchStart() {
     setState(() {
       _isSearching = true;
@@ -129,8 +134,7 @@ class SearchImgState extends State<SearchImg> {
       _controller.clear();
     });
   }
-
-  void searchOperation(String searchText) {
+   void searchOperation(String searchText) {
     searchresult.clear();
     if (_isSearching != null) {
       for (int i = 0; i < _list.length; i++) {

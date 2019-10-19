@@ -21,11 +21,6 @@ class ProfilePage extends StatefulWidget {
 
 class ProfilePageState extends State<ProfilePage> with SingleTickerProviderStateMixin {
 
-  void initState() {
-    super.initState();
-    gettingAccount();
-  }
-
   Future<Account> gettingAccount() {
     return getAccountBase(widget.client);
   }
@@ -111,7 +106,7 @@ class ProfilePageState extends State<ProfilePage> with SingleTickerProviderState
                     Posts(widget.client),
                     Comments(),
                     Following(),
-                    About(),
+                    About(widget.client),
                   ],
                 )
             )));

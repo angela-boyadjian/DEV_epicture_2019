@@ -7,9 +7,7 @@ class CommentBar extends StatefulWidget {
   CommentBar(this.photo);
 
   @override
-  State<StatefulWidget> createState() {
-    return CommentBarState(photo);
-  }
+  State<StatefulWidget> createState() => CommentBarState(photo);
 }
 
 class CommentBarState extends State<CommentBar> {

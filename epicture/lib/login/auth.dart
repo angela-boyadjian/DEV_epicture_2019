@@ -12,7 +12,7 @@ import 'package:epicture/const.dart';
 final authorizationEndpoint = Uri.parse("https://api.imgur.com/oauth2/authorize?client_id=" +
   Constants.API_KEY + "&response_type=token&state=Epicture");
 final tokenEndpoint = Uri.parse("https://api.imgur.com/oauth2/token");
-final redirectUrl = Uri.parse("http://localhost/test");
+final redirectUrl = Uri.parse("http://localhost/token");
 
 class Auth extends StatefulWidget {
   @override
@@ -31,7 +31,6 @@ class AuthState extends State<Auth> {
 
   void initState() {
     newUrl = grant.getAuthorizationUrl(redirectUrl).toString();
-    print(newUrl);
     super.initState();
   }
 

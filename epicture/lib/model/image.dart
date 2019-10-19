@@ -1,8 +1,5 @@
 import 'dart:convert';
 
-import 'tags.dart';
-import 'album.dart';
-
 class Imgur {
   final String success;
   final int status;
@@ -36,6 +33,8 @@ class ImgurImage {
   final String section;
   final String description;
   final int commentCount;
+  final int favoriteCount;
+  final bool favorite;
   final int views;
   List<dynamic> tags;
 
@@ -48,23 +47,33 @@ class ImgurImage {
     this.section,
     this.description,
     this.commentCount,
+    this.favoriteCount,
+    this.favorite,
     this.views,
     this.tags,
+
   });
 
+  // get album { return isAlbum; }
+
   factory ImgurImage.fromJson(Map<String, dynamic> json) {
-    return new ImgurImage(
-        title: json['title'],
-        link: json['link'],
-        isAlbum: json['is_album'],
-        ups: json['ups'],
-        downs: json['downs'],
-        section: json['section'],
-        description: json['description'],
-        commentCount: json['comment_count'],
-        views: json['views'],
-        tags: json['tags'],
-    );
+    // if (json['type'] != 'video/mp4') {
+      return ImgurImage(
+          title: json['title'],
+          link: json['link'],
+          isAlbum: json['is_album'],
+          ups: json['ups'],
+          downs: json['downs'],
+          section: json['section'],
+          description: json['description'],
+          commentCount: json['comment_count'],
+          favoriteCount: json['favorite_count'],
+          favorite: json['favorite' ?? false],
+          views: json['views'],
+          tags: json['tags'],
+      );
+    // }
+    // return null;
   }
 
   String get linkUrl {
@@ -75,20 +84,18 @@ class ImgurImage {
 List<ImgurImage> parsePhotos(String responseBody) {
   final parsed = json.decode(responseBody);
   
-  var all = (parsed["data"] as List).map<ImgurImage>((json) => 
+  var all = (parsed['data'] as List).map<ImgurImage>((json) =>
      new ImgurImage.fromJson(json)).toList();
   List<ImgurImage> img = List<ImgurImage>.from(all);
   img.removeWhere((item) => item.isAlbum == true);
   return img;
 }
 
-// FIXME Images not display error codec
-List<ImgurImage> parseFavorite(String responseBody) {
+List<ImgurImage> parseTags(String responseBody) {
   final parsed = json.decode(responseBody);
 
-  var all = (parsed["data"] as List).map<ImgurImage>((json) =>
-     new ImgurImage.fromJson(json)).toList();
-  return all;
+  return (parsed['data']['items'] as List).map<ImgurImage>((json) =>
+  new ImgurImage.fromJson(json)).toList();
 }
 
 List<ImgurImage> parsePosts(String responseBody) {
@@ -98,3 +105,11 @@ List<ImgurImage> parsePosts(String responseBody) {
   new ImgurImage.fromJson(json)).toList();
   return all;
 }
+// FIXME Images not display error codec
+// List<ImgurImage> parseFavorite(String responseBody) {
+//   final parsed = json.decode(responseBody);
+
+//   var all = (parsed["data"] as List).map<ImgurImage>((json) => 
+//      new ImgurImage.fromJson(json)).toList();
+//   return all;
+// }

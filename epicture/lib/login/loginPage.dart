@@ -36,7 +36,7 @@ class LoginPageState extends State<LoginPage>
           image: new AssetImage("assets/login_background.jpg"),
           fit: BoxFit.cover,
           colorBlendMode: BlendMode.darken,
-          color: Colors.black87,
+          color: Colors.black87.withOpacity(0.7),
         ),
         new Theme(
           data: new ThemeData(

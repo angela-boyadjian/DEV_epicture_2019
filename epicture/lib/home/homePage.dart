@@ -6,7 +6,6 @@ import 'package:epicture/model/image.dart';
 import 'package:epicture/model/requests.dart';
 import 'package:epicture/images/photosList.dart';
 import 'homeBar.dart';
-import 'package:epicture/login/auth.dart';
 
 class HomePage extends StatefulWidget {
   List<ImgurImage> photos;
