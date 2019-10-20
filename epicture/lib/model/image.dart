@@ -37,6 +37,8 @@ class ImgurImage {
   final int favoriteCount;
   final bool favorite;
   final int views;
+  final String accountUrl;
+  final int datetime;
   List<dynamic> tags;
 
   ImgurImage({
@@ -53,7 +55,8 @@ class ImgurImage {
     this.favorite,
     this.views,
     this.tags,
-
+    this.accountUrl,
+    this.datetime,
   });
 
   factory ImgurImage.fromJson(Map<String, dynamic> json) {
@@ -72,6 +75,8 @@ class ImgurImage {
           favorite: json['favorite' ?? false],
           views: json['views'],
           tags: json['tags'],
+          accountUrl: json['account_url'],
+          datetime: json['datetime'],
       );
     // }
     // return null;

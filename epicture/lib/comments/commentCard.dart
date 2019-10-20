@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:epicture/model/comment.dart';
 import 'commentBar.dart';
+import 'package:epicture/images/imageCard.dart';
 
 class CommentCard extends StatefulWidget {
   final Comment comment;
@@ -22,6 +23,11 @@ class CommentCardState extends State<CommentCard> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
               Text(widget.comment.author, style: TextStyle(color: Colors.grey)),
+            ],),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+              Text(getTime(widget.comment.datetime), style: TextStyle(color: Colors.grey)),
             ],),
             Text(widget.comment.comment, style: TextStyle(color: Colors.white, height: 1,
                   fontSize: 15, fontWeight: FontWeight.bold)),

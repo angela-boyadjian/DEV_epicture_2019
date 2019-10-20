@@ -53,8 +53,8 @@ class CommentPageState extends State<CommentPage> {
             builder: (context, snapshot) {
               if (snapshot.hasError) print(snapshot.error);
               return snapshot.hasData
-                  ? new CommentList(comments: snapshot.data)
-                  : new Center(child: new CircularProgressIndicator());
+                ? new CommentList(comments: snapshot.data)
+                : new Center(child: new CircularProgressIndicator());
             },
           ),
         ],)
