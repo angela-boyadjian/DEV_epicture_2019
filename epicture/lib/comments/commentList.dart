@@ -1,8 +1,9 @@
+import 'package:epicture/comments/commentCard.dart';
 import 'package:flutter/material.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
 
 import 'package:epicture/model/comment.dart';
-// import 'commentCard.dart';
+import 'commentCard.dart';
 
 class CommentList extends StatefulWidget {
   List<Comment> comments;
@@ -18,9 +19,7 @@ class CommentListState extends State<CommentList> {
 
   CommentListState();
 
-  _scrollListener() {
- 
- }
+  _scrollListener() {}
 
   @override
   void initState() {
@@ -32,10 +31,12 @@ class CommentListState extends State<CommentList> {
   @override
   Widget build(BuildContext context) {
     return new ListView.builder(
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
       controller: _controller,
       itemCount: widget.comments.length,
       itemBuilder: (context, index) {
-        return new Text(widget.comments[index].comment);
+        return new CommentCard(widget.comments[index]);
       },
     );
   }

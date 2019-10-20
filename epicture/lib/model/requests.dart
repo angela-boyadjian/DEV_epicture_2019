@@ -62,9 +62,14 @@ Future<List<ImgurImage>> getPosts(oauth2.Client client) async {
 
 // NOTE Get comments for given image
 Future<List<Comment>> getComments(oauth2.Client client, String id) async {
-  var response = await client.get("https://api.imgur.com/3/gallery/" +
-    id + "/comments");
-  print(response);
+  // FIXME Client is null -> Connection refused ?
+  var response = await http.get(
+    'https://api.imgur.com/3/gallery/' + id + '/comments?client_id=' + Constants.API_KEY,
+    headers: {
+      HttpHeaders.authorizationHeader: "Client-ID " + Constants.API_KEY,
+      "Accept" : "application/json",
+    }
+  );
   return compute(parseComments, response.body);
 }
 

@@ -1,63 +1,59 @@
 import 'package:flutter/material.dart';
 
-import 'package:epicture/model/image.dart';
+import 'package:epicture/model/comment.dart';
 
 class CommentBar extends StatefulWidget {
-  final ImgurImage photo;
-  CommentBar(this.photo);
+  final Comment comment;
+  CommentBar(this.comment);
 
   @override
-  State<StatefulWidget> createState() => CommentBarState(photo);
+  State<StatefulWidget> createState() => CommentBarState();
 }
 
 class CommentBarState extends State<CommentBar> {
-  ImgurImage photo;
-  CommentBarState(this.photo);
   Color favColor = Colors.white;
   bool isFav = false;
   Color upColor = Colors.white;
   bool isUp = false;
+  Color downColor = Colors.white;
+  bool isDown = false;
 
-  Widget get CommentBar {
+  Widget get commentBar {
     return new ButtonTheme.bar(
-      child: new ButtonBar(
+      child: ButtonBar(
         alignment: MainAxisAlignment.center,
         children: <Widget>[
-          new FlatButton.icon(
-              icon: Icon(Icons.thumb_up, color: upColor),
-              label: Text(photo.ups.toString(), style: TextStyle(color: Colors.white)),
-              onPressed: () { setState(() {
-                if (isUp) {
-                  upColor = Colors.white;
-                  isUp = false;
-                } else {
-                  upColor = Colors.green;
-                  isUp = true;
-                }
-              });},
+          FlatButton.icon(
+            icon: Icon(Icons.thumb_up, color: upColor),
+            label: Text(widget.comment.ups.toString(), style: TextStyle(color: Colors.white)),
+            onPressed: () { setState(() {
+              if (isUp) {
+                upColor = Colors.white;
+                isUp = false;
+              } else {
+                upColor = Colors.green;
+                isUp = true;
+                isDown = false;
+                downColor = Colors.white;
+              }
+            });},
           ),
-          new FlatButton.icon(
-              icon: Icon(Icons.comment, color: Colors.white),
-              label: Text(photo.commentCount.toString(), style: TextStyle(color: Colors.white)),
-              onPressed: () {}
+          FlatButton.icon(
+            icon: Icon(Icons.thumb_down, color: downColor),
+            label: Text(widget.comment.downs.toString(), style: TextStyle(color: Colors.white)),
+            onPressed: () { setState(() {
+              if (isDown) {
+                downColor = Colors.white;
+                isDown = false;
+              } else {
+                downColor = Colors.red;
+                isDown = true;
+                isUp = false;
+                upColor = Colors.white;
+              }
+            });}
           ),
-          new FlatButton.icon(
-              icon: Icon(Icons.favorite, color: favColor),
-              label: Text("42", style: TextStyle(color: Colors.white)),
-              onPressed: () { setState(() {
-                if (isFav) {
-                  favColor = Colors.white;
-                  isFav = false;
-                } else {
-                  favColor = Colors.pink;
-                  isFav = true;
-                }
-              });},
-          ),
-          new IconButton(
-              icon: Icon(Icons.share, color: Colors.white),
-              onPressed: () { },
-          ),
+          Text("Reply", style: TextStyle(color: Colors.white)),
         ],
       ),
     );
@@ -66,7 +62,7 @@ class CommentBarState extends State<CommentBar> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      child:  CommentBar,
+      child: commentBar,
     );
   }
 }
