@@ -86,7 +86,7 @@ class UploadInfoState extends State<UploadInfo> {
                 titleController.text, desController.text);
               postImage(widget.client, imgObj);
               Navigator.push(context, new MaterialPageRoute(
-                builder: (context) => MainTabBar(widget.client)));
+                builder: (context) => MainTabBar(client: widget.client)));
             }
           ),
         ],

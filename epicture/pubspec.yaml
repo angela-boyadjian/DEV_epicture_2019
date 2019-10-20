@@ -33,8 +33,9 @@ dependencies:
   intl: ^0.15.8
 
 dev_dependencies:
-  flutter_test:
+  flutter_driver:
     sdk: flutter
+  test: any
   build_runner: ^1.0.0
   json_serializable: ^2.0.0
 

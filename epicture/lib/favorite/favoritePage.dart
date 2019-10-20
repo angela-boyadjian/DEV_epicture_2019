@@ -15,7 +15,6 @@ class FavoritePage extends StatefulWidget {
   FavoritePageState createState() => new FavoritePageState();
 }
 class FavoritePageState extends State<FavoritePage> {
-
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blueGrey,

@@ -10,7 +10,7 @@ class ImageBar extends StatefulWidget {
   oauth2.Client client;
   bool isCommentPage;
 
-  ImageBar(this.client, this.photo, this.isCommentPage);
+  ImageBar({Key key, this.client, this.photo, this.isCommentPage}) : super(key: new Key("ImageBar"));
 
   @override
   State<StatefulWidget> createState() => ImageBarState();

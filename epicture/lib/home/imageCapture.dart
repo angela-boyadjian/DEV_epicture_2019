@@ -17,8 +17,6 @@ class ImageCapture extends StatefulWidget {
 class ImageCaptureState extends State<ImageCapture> {
   File imageFile;
 
-  ImageCaptureState();
-
   Widget get bottomBar {
     return Scaffold(
       floatingActionButton: FloatingActionButton(

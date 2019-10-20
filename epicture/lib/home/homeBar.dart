@@ -10,7 +10,7 @@ class HomeBar extends StatefulWidget {
   BuildContext context;
   oauth2.Client client;
 
-  HomeBar(this.context, this.client);
+  HomeBar({Key key, this.context, this.client}) : super(key: new Key("HomeBar"));
   @override
   State<StatefulWidget> createState() => new HomeBarState(context);
 }

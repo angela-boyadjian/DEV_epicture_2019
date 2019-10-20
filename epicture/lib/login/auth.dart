@@ -50,7 +50,7 @@ class AuthState extends State<Auth> {
 
     if (client != null) {
       Navigator.push(context, new MaterialPageRoute(
-              builder: (context) => MainTabBar(client),
+              builder: (context) => MainTabBar(client: client),
       ),);
     }
   }

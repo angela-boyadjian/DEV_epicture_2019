@@ -9,24 +9,25 @@ import 'homeBar.dart';
 
 class HomePage extends StatefulWidget {
   List<ImgurImage> photos;
-  var  mPageCount = 0;
   oauth2.Client client;
 
-  HomePage(this.client);
+  HomePage({Key key, this.client}) : super(key: new Key("HomePage"));
   @override
   HomePageState createState() => new HomePageState();
 }
 
-// add_a_photo 
 class HomePageState extends State<HomePage> {
+  var  mPageCount = 0;
+
+  void increment() => this.mPageCount++;
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(preferredSize: Size.fromHeight(45.0),
-          child: new HomeBar(context, widget.client),
+          child: new HomeBar(context: context, client: widget.client),
       ),
         backgroundColor: Colors.black54,
         body: new FutureBuilder<List<ImgurImage>>(
-          future: gettingData(),
+          future: this.gettingData(),
           builder: (context, snapshot) {
             if (snapshot.hasError) print(snapshot.error);
             return snapshot.hasData
@@ -38,7 +39,7 @@ class HomePageState extends State<HomePage> {
   }
 
   Future<List<ImgurImage>> gettingData() {
-    widget.mPageCount++;
-    return getData(new http.Client(), widget.mPageCount);
+    this.increment();
+    return getData(new http.Client(), this.mPageCount);
   }
 }

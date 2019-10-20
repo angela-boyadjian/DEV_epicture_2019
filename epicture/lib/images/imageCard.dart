@@ -19,12 +19,13 @@ class ImageCard extends StatefulWidget {
 
 class ImageCardState extends State<ImageCard> {
   ImgurImage photo;
-  String renderUrl;
-  ImageCardState(this.photo);
+  String renderUrl = "";
   Color favColor = Colors.white;
   bool isFav = false;
   Color upColor = Colors.white;
   bool isUp = false;
+
+  ImageCardState(this.photo);
 
   Widget get imageCard {
     return new Card(
@@ -54,7 +55,7 @@ class ImageCardState extends State<ImageCard> {
             ],),
             new CachedNetworkImage(imageUrl: photo.link),
             new ImageTags(photo),
-            new ImageBar(widget.client, photo, widget.isCommentPage),
+            new ImageBar(client: widget.client, photo: photo, isCommentPage: widget.isCommentPage),
           ],
         ),
       );
