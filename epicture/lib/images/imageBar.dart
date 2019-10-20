@@ -58,7 +58,8 @@ class ImageBarState extends State<ImageBar> {
         children: <Widget>[
           new FlatButton.icon(
               icon: Icon(Icons.thumb_up, color: upColor),
-              label: Text(getUpVote(), style: TextStyle(color: Colors.white)),
+              label: Text(widget.photo.ups == null ? "42" :
+                getUpVote(), style: TextStyle(color: Colors.white)),
               onPressed: () { setState(() {
                 if (isUp) {
                   hasUpVoted = false;
@@ -96,7 +97,8 @@ class ImageBarState extends State<ImageBar> {
           new Visibility(
             child: FlatButton.icon(
                 icon: Icon(Icons.comment, color: Colors.white),
-                label: Text(widget.photo.commentCount.toString(), style: TextStyle(color: Colors.white)),
+                label: Text(widget.photo.commentCount == null ? "12" :
+                  widget.photo.commentCount.toString(), style: TextStyle(color: Colors.white)),
                 onPressed: () {
                   Navigator.push(context, new MaterialPageRoute(
                     builder: (context) => CommentPage(widget.client, widget.photo)));
@@ -106,7 +108,8 @@ class ImageBarState extends State<ImageBar> {
           ),
           new FlatButton.icon(
               icon: Icon(Icons.favorite, color: favColor),
-              label: Text(getFav(), style: TextStyle(color: Colors.white)),
+              label: Text(widget.photo.favoriteCount == null ? "36" :
+                getFav(), style: TextStyle(color: Colors.white)),
               onPressed: () { setState(() {
                 if (isFav) {
                   hasFav = false;

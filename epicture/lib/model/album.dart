@@ -1,34 +1,30 @@
 import 'dart:convert';
 
-import 'image.dart';
-
 class Album {
-  final String success;
+  final String id;
   final int status;
   final int imagesCount;
-  final List<ImgurImage> images;
+  final String cover;
 
   Album({
-    this.success,
+    this.id,
     this.status,
     this.imagesCount,
-    this.images,
+    this.cover,
   });
-
-  get getImages { return this.images; }
 
   factory Album.fromJson(Map<String, dynamic> json) {
     return new Album(
-      success: json['id'],
+      id: json['id'],
       status: json['status'],
       imagesCount: json['images_count'],
-      images: parsePhotos(json['images']),
+      cover: json['cover'],
     );
   }
 }
 
-List<ImgurImage> parseAlbum(String responseBody) {
+List<Album> parseAlbum(String responseBody) {
   final parsed = json.decode(responseBody);
-  return (parsed["data"] as List).map<ImgurImage>((json) => 
-     new ImgurImage.fromJson(json)).toList();
+  return (parsed["data"] as List).map<Album>((json) => 
+     new Album.fromJson(json)).toList();
 }

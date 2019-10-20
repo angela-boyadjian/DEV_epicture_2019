@@ -2,9 +2,7 @@ import 'package:epicture/model/image.dart';
 import 'package:flutter/material.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
 
-import 'package:epicture/model/album.dart';
 import 'package:epicture/model/requests.dart';
-import 'package:epicture/albums/albumList.dart';
 import 'package:epicture/images/photosList.dart';
 
 class FavoritePage extends StatefulWidget {

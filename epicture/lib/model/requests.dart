@@ -43,8 +43,18 @@ void postImage(oauth2.Client client, ImageToPost imgObj) async {
 // NOTE Get user favorites
 Future<List<ImgurImage>> getFavorite(oauth2.Client client) async {
   var response = await client.get("https://api.imgur.com/3/account/me/favorites/0");
-
-  return compute(parseAlbum, response.body);
+  var album = parseAlbum(response.body);
+  List<ImgurImage> imgList = [];
+  print(album.length);
+  for (var items in album) {
+    var response = await client.get("https://api.imgur.com/3/image/" + items.cover);
+    print(response.body);
+    var parsed = json.decode(response.body);
+    var image = new ImgurImage.fromJson(parsed['data']);
+    if (image.type != "video/mp4")
+      imgList.add(image);
+  }
+  return imgList;
 }
 
 // NOTE Get User Name
@@ -74,11 +84,7 @@ Future<List<Comment>> getComments(oauth2.Client client, String id) async {
 
 // NOTE Add to favorite
 void addToFavorite(oauth2.Client client, String id) async {
-  var response = await client.post('https://api.imgur.com/3/image/' + id + '/favorite');
-  if (response.statusCode == 200)
-    print("ERRROOOOOOR");
-  else
-    print("SUCCEESSSSS");
+  await client.post('https://api.imgur.com/3/image/' + id + '/favorite');
 }
 
 void getSubmissions(oauth2.Client client) async {

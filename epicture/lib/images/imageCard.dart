@@ -36,7 +36,7 @@ class ImageCardState extends State<ImageCard> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-               Text(photo.accountUrl, style: TextStyle(color: Colors.white)),
+               Text(photo.accountUrl == null ? "Anonymous" : photo.accountUrl, style: TextStyle(color: Colors.white)),
              ], 
             ),
             Row(
@@ -45,7 +45,7 @@ class ImageCardState extends State<ImageCard> {
                Text(getTime(photo.datetime), style: TextStyle(color: Colors.white)),
              ], 
             ),
-            Center(child: Text(photo.title, style: TextStyle(color: Colors.white, height: 1,
+            Center(child: Text(photo.title == null ? " " : photo.title, style: TextStyle(color: Colors.white, height: 1,
               fontSize: 20, fontWeight: FontWeight.bold))),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,

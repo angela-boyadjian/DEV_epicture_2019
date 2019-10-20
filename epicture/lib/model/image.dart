@@ -30,6 +30,7 @@ class ImgurImage {
   final String link;
   final bool isAlbum;
   final int ups;
+  final String type;
   final int downs;
   final String section;
   final String description;
@@ -46,6 +47,7 @@ class ImgurImage {
     this.title,
     this.link,
     this.isAlbum,
+    this.type,
     this.ups,
     this.downs,
     this.section,
@@ -63,6 +65,7 @@ class ImgurImage {
     // if (json['type'] != 'video/mp4') {
       return ImgurImage(
           id: json['id'],
+          type: json['type'],
           title: json['title'],
           link: json['link'],
           isAlbum: json['is_album'],
