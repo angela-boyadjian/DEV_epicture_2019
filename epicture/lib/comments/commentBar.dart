@@ -17,6 +17,24 @@ class CommentBarState extends State<CommentBar> {
   bool isUp = false;
   Color downColor = Colors.white;
   bool isDown = false;
+  int upVote;
+  bool hasUpVoted = false;
+  int downVote;
+  bool hasDownVoted = false;
+
+   String getUpVote() {
+    this.upVote = widget.comment.ups;
+    if (this.hasUpVoted)
+      this.upVote += 1;
+    return upVote.toString();
+  }
+
+  String getDownVote() {
+    this.downVote = widget.comment.downs;
+    if (this.hasDownVoted)
+      this.downVote += 1;
+    return downVote.toString();
+  }
 
   Widget get commentBar {
     return new ButtonTheme.bar(
@@ -25,12 +43,14 @@ class CommentBarState extends State<CommentBar> {
         children: <Widget>[
           FlatButton.icon(
             icon: Icon(Icons.thumb_up, color: upColor),
-            label: Text(widget.comment.ups.toString(), style: TextStyle(color: Colors.white)),
+            label: Text(getUpVote(), style: TextStyle(color: Colors.white)),
             onPressed: () { setState(() {
               if (isUp) {
+                hasUpVoted = false;
                 upColor = Colors.white;
                 isUp = false;
               } else {
+                hasUpVoted = true;
                 upColor = Colors.green;
                 isUp = true;
                 isDown = false;
@@ -40,12 +60,14 @@ class CommentBarState extends State<CommentBar> {
           ),
           FlatButton.icon(
             icon: Icon(Icons.thumb_down, color: downColor),
-            label: Text(widget.comment.downs.toString(), style: TextStyle(color: Colors.white)),
+            label: Text(getDownVote(), style: TextStyle(color: Colors.white)),
             onPressed: () { setState(() {
               if (isDown) {
+                hasDownVoted = false;
                 downColor = Colors.white;
                 isDown = false;
               } else {
+                hasDownVoted = true;
                 downColor = Colors.red;
                 isDown = true;
                 isUp = false;

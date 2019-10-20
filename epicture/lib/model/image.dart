@@ -111,11 +111,3 @@ List<ImgurImage> parsePosts(String responseBody) {
   new ImgurImage.fromJson(json)).toList();
   return all;
 }
-// FIXME Images not display error codec
-// List<ImgurImage> parseFavorite(String responseBody) {
-//   final parsed = json.decode(responseBody);
-
-//   var all = (parsed["data"] as List).map<ImgurImage>((json) => 
-//      new ImgurImage.fromJson(json)).toList();
-//   return all;
-// }

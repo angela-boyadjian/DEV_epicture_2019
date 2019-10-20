@@ -1,3 +1,4 @@
+import 'package:epicture/model/requests.dart';
 import 'package:flutter/material.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
 
@@ -112,6 +113,7 @@ class ImageBarState extends State<ImageBar> {
                   favColor = Colors.white;
                   isFav = false;
                 } else {
+                  addToFavorite(widget.client, widget.photo.id);
                   hasFav = true;
                   favColor = Colors.pink;
                   isFav = true;

@@ -57,12 +57,11 @@ Future<Account> getAccountBase(oauth2.Client client) async {
 Future<List<ImgurImage>> getPosts(oauth2.Client client) async {
   var response = await client.get("https://api.imgur.com/3/account/me/submissions/");
 
-  return compute(parseAlbum, response.body);
+  return compute(parsePhotos, response.body);
 }
 
 // NOTE Get comments for given image
 Future<List<Comment>> getComments(oauth2.Client client, String id) async {
-  // FIXME Client is null -> Connection refused ?
   var response = await http.get(
     'https://api.imgur.com/3/gallery/' + id + '/comments?client_id=' + Constants.API_KEY,
     headers: {
@@ -71,6 +70,15 @@ Future<List<Comment>> getComments(oauth2.Client client, String id) async {
     }
   );
   return compute(parseComments, response.body);
+}
+
+// NOTE Add to favorite
+void addToFavorite(oauth2.Client client, String id) async {
+  var response = await client.post('https://api.imgur.com/3/image/' + id + '/favorite');
+  if (response.statusCode == 200)
+    print("ERRROOOOOOR");
+  else
+    print("SUCCEESSSSS");
 }
 
 void getSubmissions(oauth2.Client client) async {
