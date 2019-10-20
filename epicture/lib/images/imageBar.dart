@@ -22,6 +22,33 @@ class ImageBarState extends State<ImageBar> {
   bool isUp = false;
   Color downColor = Colors.white;
   bool isDown = false;
+  int upVote;
+  bool hasUpVoted = false;
+  int downVote;
+  bool hasDownVoted = false;
+  int fav;
+  bool hasFav = false;
+
+  String getUpVote() {
+    this.upVote = widget.photo.ups;
+    if (this.hasUpVoted)
+      this.upVote += 1;
+    return upVote.toString();
+  }
+
+  String getDownVote() {
+    this.downVote = widget.photo.downs;
+    if (this.hasDownVoted)
+      this.downVote += 1;
+    return downVote.toString();
+  }
+
+  String getFav() {
+    this.fav = widget.photo.favoriteCount;
+    if (this.hasFav)
+      this.fav += 1;
+    return fav.toString();
+  }
 
   Widget get imageBar {
     return new ButtonTheme.bar(
@@ -30,12 +57,14 @@ class ImageBarState extends State<ImageBar> {
         children: <Widget>[
           new FlatButton.icon(
               icon: Icon(Icons.thumb_up, color: upColor),
-              label: Text(widget.photo.ups.toString(), style: TextStyle(color: Colors.white)),
+              label: Text(getUpVote(), style: TextStyle(color: Colors.white)),
               onPressed: () { setState(() {
                 if (isUp) {
+                  hasUpVoted = false;
                   upColor = Colors.white;
                   isUp = false;
                 } else {
+                  hasUpVoted = true;
                   upColor = Colors.green;
                   isUp = true;
                   isDown = false;
@@ -46,12 +75,14 @@ class ImageBarState extends State<ImageBar> {
           new Visibility(
             child: FlatButton.icon(
                 icon: Icon(Icons.thumb_down, color: downColor),
-                label: Text(widget.photo.downs.toString(), style: TextStyle(color: Colors.white)),
+                label: Text(getDownVote(), style: TextStyle(color: Colors.white)),
                 onPressed: () { setState(() {
                   if (isDown) {
+                    hasDownVoted = false;
                     downColor = Colors.white;
                     isDown = false;
                   } else {
+                    hasDownVoted = true;
                     downColor = Colors.red;
                     isDown = true;
                     isUp = false;
@@ -74,12 +105,14 @@ class ImageBarState extends State<ImageBar> {
           ),
           new FlatButton.icon(
               icon: Icon(Icons.favorite, color: favColor),
-              label: Text(widget.photo.favoriteCount.toString(), style: TextStyle(color: Colors.white)),
+              label: Text(getFav(), style: TextStyle(color: Colors.white)),
               onPressed: () { setState(() {
                 if (isFav) {
+                  hasFav = false;
                   favColor = Colors.white;
                   isFav = false;
                 } else {
+                  hasFav = true;
                   favColor = Colors.pink;
                   isFav = true;
                 }
