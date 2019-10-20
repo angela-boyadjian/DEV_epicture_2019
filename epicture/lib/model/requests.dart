@@ -45,10 +45,8 @@ Future<List<ImgurImage>> getFavorite(oauth2.Client client) async {
   var response = await client.get("https://api.imgur.com/3/account/me/favorites/0");
   var album = parseAlbum(response.body);
   List<ImgurImage> imgList = [];
-  print(album.length);
   for (var items in album) {
     var response = await client.get("https://api.imgur.com/3/image/" + items.cover);
-    print(response.body);
     var parsed = json.decode(response.body);
     var image = new ImgurImage.fromJson(parsed['data']);
     if (image.type != "video/mp4")
@@ -88,7 +86,5 @@ void addToFavorite(oauth2.Client client, String id) async {
 }
 
 void getSubmissions(oauth2.Client client) async {
-  var response = await client.get("https://api.imgur.com/3/account/me/submissions/0");
-
-  print(response.toString());
+  await client.get("https://api.imgur.com/3/account/me/submissions/0");
 }
