@@ -38,6 +38,8 @@ class ImageBarState extends State<ImageBar> {
                 } else {
                   upColor = Colors.green;
                   isUp = true;
+                  isDown = false;
+                  downColor = Colors.white;
                 }
               });},
           ),
@@ -52,6 +54,8 @@ class ImageBarState extends State<ImageBar> {
                   } else {
                     downColor = Colors.red;
                     isDown = true;
+                    isUp = false;
+                    upColor = Colors.white;
                   }
                 });},
             ),
